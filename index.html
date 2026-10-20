@@ -53,6 +53,12 @@ header.hero{padding-block:64px 44px;display:grid;grid-template-columns:auto minm
 .contact{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:18px;font-size:14.5px}
 .contact .mono{font-size:14px;user-select:all}
 .contact b{font-weight:500;color:var(--ink-faint);margin-right:6px;font-size:12px;letter-spacing:.06em}
+.glance{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0;padding:18px 0 0;border-top:1px solid var(--rule)}
+.glance div{padding:0 18px;border-left:1px solid var(--rule)}
+.glance div:first-child{border-left:0;padding-left:0}
+.glance dt{font-size:13px;color:var(--ink-faint)}
+.glance dd{margin:2px 0 0;font-family:var(--mono);font-size:24px;font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums}
+.glance dd small{font-family:var(--body);font-size:14px;font-weight:400;margin-left:2px;color:var(--ink-soft)}
 
 .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--rule);display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;padding-block:12px}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
@@ -164,6 +170,8 @@ footer button{font:inherit;font-size:14px;border:1px solid var(--rule);backgroun
 @media (max-width:620px){
   header.hero{grid-template-columns:minmax(0,1fr);padding-block:40px 32px}
   .portrait{width:132px}
+  .glance{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:16px}
+  .glance div:nth-child(3){border-left:0;padding-left:0}
   .tl li{grid-template-columns:minmax(0,1fr);gap:2px}
   .figs{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
   .grid{grid-template-columns:minmax(0,1fr)}
@@ -183,6 +191,12 @@ footer button{font:inherit;font-size:14px;border:1px solid var(--rule);backgroun
       <div><b>TEL</b><span class="mono">010-4814-0541</span></div>
     </div>
   </div>
+  <dl class="glance" aria-label="한눈에 보기">
+    <div><dt>경력</dt><dd>5<small>년</small></dd></div>
+    <div><dt>제안서 작업</dt><dd>20<small>건+</small></dd></div>
+    <div><dt>정부·공공기관</dt><dd>8<small>곳</small></dd></div>
+    <div><dt>헬스케어 캠페인</dt><dd>3<small>건</small></dd></div>
+  </dl>
 </header>
 
 <nav class="nav" aria-label="섹션 이동">
@@ -327,7 +341,7 @@ const P=[
  figs:[["전국 선발","20명"],["대상 연령","만 40–69세"],["운영 기간","약 6개월"]],
  bg:"청년 위주로 운영되던 정책 서포터즈를, 실제로 제도가 필요한 중장년층까지 넓히는 첫 시도였습니다. 대상이 바뀐 만큼 모집 방식과 활동 미션도 새로 짜야 했습니다.",
  did:[["중장년층 대상 서포터즈 운영계획 수립, 고용노동부·지청 SNS와 제도 이용자 대상 안내 메일로 모집 홍보 (3.24–4.16)","img/supporters-5.jpg"],"월간 운영 규칙 설계: 매월 1일 주제 공지 → 5일 활동계획서 → 25일 콘텐츠 제출, 블로그·인스타그램·유튜브별 콘텐츠 기준 마련",["27쪽 분량 운영 가이드북과 월별 미션 가이드 제작, 발대식(4.29, 서울고용센터)에서 서포터즈 역할·가이드 교육 진행","img/supporters-1.jpg"],["3개월간 활동 콘텐츠 관리와 우수 서포터즈 인센티브 운영","img/supporters-14.jpg"],"중장년이 많이 찾는 일자리 박람회에 커피트럭과 현장 상담 부스를 세우는 '취업이룸 커피트럭' 캠페인 기획·운영"],
- res:["발대식부터 수료식(8.7)까지 전 과정 운영","준비 기간 포함 약 6개월, 서포터즈 실제 활동 5–7월"],note:""},
+ res:["발대식부터 수료식(8.7)까지 전 과정 기획","준비 기간 포함 약 6개월, 서포터즈 실제 활동 5–7월"],note:""},
 {id:"pension",sec:"proposal",title:"2025 국민연금 정책홍보 제안 「미래지하철」",client:"보건복지부 · 국민연금공단",year:"2025.04",key:"대표 카피·캠페인 컨셉 기획",tags:["공공"],
  cover:"img/pension-2.jpg",imgs:["img/pension-2.jpg","img/pension-3.jpg","img/pension-1.jpg"],
  role:"대표 카피와 캠페인 컨셉 기획, 캠페인 제안 파트 작성",team:"하이브월드와이드 공공 홍보팀",
