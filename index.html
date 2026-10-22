@@ -143,6 +143,7 @@ section.cap{padding-block:56px 0;scroll-margin-top:64px}
 .task button{all:unset;cursor:zoom-in;display:block;position:relative;border-radius:6px;overflow:hidden;border:1px solid var(--rule);aspect-ratio:16/10;max-width:100%}
 .task button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .task img{width:100%;height:100%;object-fit:cover;display:block}
+.task .more{position:absolute;right:6px;top:6px;font-size:12px;line-height:1.5;background:rgba(10,12,18,.72);color:#fff;padding:1px 8px;border-radius:999px;pointer-events:none}
 .task img.fit{object-fit:contain;background:#fff}
 .res{background:var(--sheet);border:1px solid var(--rule);border-radius:8px;padding:14px 16px}
 .res ul{margin:0;padding-left:1.1em;color:var(--ink-soft)}
@@ -340,29 +341,30 @@ const CAP={
  "img/hydrogen-script.jpg":"직접 쓴 원고 일부","img/sk-earthgirl-script.jpg":"직접 쓴 원고 일부",
  "img/squid-storyboard.jpg":"직접 만든 티저 스토리보드","img/easy-yt-4.jpg":"협업 유튜버 영상 화면"
 };
-const lab=src=>CAP[src]?`<span class="glabel">${esc(CAP[src])}</span>`:"";
+const capOf=src=>CAP[src]||(/\/doc-/.test(src)?"직접 쓴 문서":"");
+const lab=src=>capOf(src)?`<span class="glabel">${esc(capOf(src))}</span>`:"";
 const P=[
-{id:"squidgame",sec:"campaign",also:"content",focus:{content:[8,9,10]},keys:{content:"SNS 운영 전략·콘텐츠 기획안 직접 작성"},mine:"웹사이트 설계·광고 운영, 거리 이벤트 PM",title:"오징어 게임: 더 익스피리언스 서울 캠페인",client:"넷플릭스 IP 체험 전시",year:"2024.12–2025.04",key:"광고 노출 644만 회",tags:["엔터테인먼트"],
+{id:"squidgame",sec:"campaign",also:"content",focus:{content:[8,9,10]},keys:{content:"SNS 운영 전략·콘텐츠 기획안 직접 작성"},mine:"웹사이트 설계·광고 운영, 거리 이벤트 PM",title:"'오징어 게임: The Experience' 서울 캠페인",client:"넷플릭스 IP 체험 전시",year:"2024.12–2025.04",key:"광고 노출 644만 회",tags:["엔터테인먼트"],
  cover:"img/squid-1.jpg",covers:{content:"img/squid-5.jpg"},imgs:["img/squid-1.jpg","img/squid-street-2.jpg","img/squid-street-3.jpg","img/squid-street-1.jpg","img/squid-2.jpg","img/squid-3.jpg","img/squid-4.jpg","img/squid-5.jpg","img/squid-6.jpg","img/squid-kv.jpg","img/squid-web.jpg"],
  role:"캠페인 웹사이트 운영 총괄, 디지털 광고 전략·집행 관리, 미디어데이 기획·운영",team:"하이브월드와이드 디지털PR팀",
  figs:[["광고 노출","644만 회"],["클릭률 (CTR)","0.77%"],["전환율 (CVR)","6.02%"]],
  bg:"뉴욕·마드리드 등을 거친 넷플릭스 체험 전시가 서울에 처음 문을 여는 시점이었습니다. 오픈 전 기대감을 만들고, 관람 예약까지 이어지는 흐름을 짜야 했습니다.",
- did:[["캠페인 공식 웹사이트의 페이지 구성을 직접 설계하고 개발사와 협업해 구현","img/squid-web.jpg"],"광고 시작 후 웹사이트 트래픽이 기본 제공량의 약 12배까지 늘자, 원인을 분석한 리포트를 직접 작성하고 비용을 미리 맡겨두는 예치금 방식을 제안",["네이버·구글·카카오·메타·틱톡 매체 믹스 전략을 세우고, 성과를 보며 예산을 다시 배분","img/squid-kv.jpg"],"광고 타깃을 25–40세에서 19–45세로 넓히자고 제안하고, '서울데이트·이색데이트·서울놀거리' 같은 나들이 검색어 중심으로 키워드 전략 수립",["성수·건대·강남역 거리 이벤트를 기획하고 PM으로 운영 (분홍 의상과 QR 명함 배포)","img/squid-street-2.jpg"],"보도자료 배포와 보도 모니터링 리포트 작성, BusinessWire를 통한 영문·일문 해외 배포 운영","싱가포르 전시 운영사(Kingsmen)와 영문 PR 일정·인플루언서 자료 조율","넷플릭스 관계자 포함 130명 규모 미디어데이(2025.2.24) 기획·운영",["공식 SNS(인스타그램·페이스북·X) 운영 전략과 월별 게시물 일정·콘텐츠 기획안 작성","img/squid-5.jpg"],["팝업스토어 티저 영상 스토리보드와 카피 작성: 세계 도시를 거쳐 서울로 오는 'The Global Tour Stop' 구성을 총소리와 타이포그래피로 15–30초에 담고, 서울 랜드마크로 현지화","img/squid-storyboard.jpg"],"인스타그램 정보 채널(파워페이지) 바이럴 콘텐츠 기획과 라디오 광고 원고 작성","공식 인스타그램 계정이 사칭 사유로 정지됐을 때(2025.1.21) 원인과 대응 방안을 정리한 위기 대응 보고서 작성","어드민 콘텐츠 관리와 웹사이트 인계서 작성까지 운영 마무리"],
+ did:[["캠페인 공식 웹사이트의 페이지 구성을 직접 설계하고 개발사와 협업해 구현","img/squid-web.jpg"],"광고 시작 후 방문이 몰려 웹사이트 트래픽이 평소 허용량의 약 12배까지 늘자, 원인을 분석해 보고하고 사이트가 멈추지 않도록 대응 방안을 제안",["네이버·구글·카카오·메타·틱톡 매체 믹스 전략을 세우고, 성과를 보며 예산을 다시 배분","img/squid-kv.jpg"],"광고 타깃을 25–40세에서 19–45세로 넓히자고 제안하고, '서울데이트·이색데이트·서울놀거리' 같은 나들이 검색어 중심으로 키워드 전략 수립",["성수·건대·강남역 거리 이벤트를 기획하고 PM으로 운영 (분홍 의상과 QR 명함 배포)","img/squid-street-2.jpg"],"보도자료 배포와 보도 모니터링 리포트 작성, BusinessWire를 통한 영문·일문 해외 배포 운영","싱가포르 전시 운영사(Kingsmen)와 영문 PR 일정·인플루언서 자료 조율","넷플릭스 관계자 포함 130명 규모 미디어데이(2025.2.24) 기획·운영",["공식 SNS(인스타그램·페이스북·X) 운영 전략과 월별 게시물 일정·콘텐츠 기획안 작성","img/squid-5.jpg"],["팝업스토어 티저 영상 스토리보드와 카피 작성: 세계 도시를 거쳐 서울로 오는 'The Global Tour Stop' 구성을 총소리와 타이포그래피로 15–30초에 담고, 서울 랜드마크로 현지화","img/squid-storyboard.jpg"],"인스타그램 정보 채널(파워페이지) 바이럴 콘텐츠 기획과 라디오 광고 원고 작성","공식 인스타그램 계정이 사칭 사유로 정지됐을 때(2025.1.21) 원인과 대응 방안을 정리한 위기 대응 보고서 작성","어드민 콘텐츠 관리와 웹사이트 인계서 작성까지 운영 마무리"],
  res:["디지털 광고 총 노출 644만 회, 클릭 49,668건","버튼 클릭 전환 2,990건 (CVR 6.02%), 네이버 검색광고 클릭률 2.35%","1.13 보도자료 국내 54건 보도, 해외 배포 영문 53곳 · 일문 14곳 게재"],note:"광고·보도 수치는 캠페인 전체 실적"},
-{id:"palace",sec:"campaign",also:"content",focus:{content:[0,2,5]},keys:{content:"봄 축전 보도자료 직접 집필"},mine:"보도자료 작성·배포, 팝업스토어 현장 운영",title:"2025 궁중문화축전",client:"국가유산진흥원",year:"2025.02–07",key:"보도 536건",tags:["공공·문화"],
- cover:"img/palace-open.jpg",covers:{content:["보도자료","봄 축전 국내 보도자료와 기획기사 앵글 직접 집필"]},imgs:["img/palace-open.jpg","img/palace-popup.jpg","img/palace-poster.jpg"],
+{id:"palace",sec:"campaign",also:"content",focus:{content:[1,3,6]},keys:{content:"봄 축전 보도자료 직접 집필"},mine:"보도자료 작성·배포, 팝업스토어 현장 운영",title:"2025 궁중문화축전",client:"국가유산진흥원",year:"2025.02–07",key:"보도 536건",tags:["공공·문화"],
+ cover:"img/palace-open.jpg",covers:{content:"img/doc-palace-cover.jpg"},imgs:["img/palace-open.jpg","img/palace-popup.jpg","img/palace-poster.jpg"],
  role:"국내외 언론홍보 운영, 보도자료 작성, 해외 보도자료 배포 운영",team:"하이브월드와이드 궁중문화축전팀",
  figs:[["보도 실적","536건"],["해외 보도","414건"],["국내 보도","122건"]],
  bg:"11회째를 맞은 국가 대표 궁중 축제입니다. 관람객 중 외국인 비중이 커지는 흐름에 맞춰 해외 홍보를 넓히는 것이 이번 해의 과제였습니다.",
- did:[["봄 축전(4.26–5.4) 국내 보도자료 직접 작성·배포 (개막, 사전 예약 매진, 유지태 오디오 가이드 참여, K-Heritage 마켓, 어린이 체험, 디즈니 협업 등)","img/palace-open.jpg"],"봄 13회·가을 7회, 연간 20회차 보도자료 배포 일정과 회차별 앵글 설계","기획기사 앵글 7건 발굴과 기자별 피칭안 작성 (개막제 감독 인터뷰, 최고령 궁이둥이, 디즈니 협업 전시 등)","신문·방송·외신·영자지를 3단계로 나눈 타깃 미디어 리스트 정리",["BusinessWire로 영문·중문 해외 보도자료 배포 운영","img/palace-poster.jpg"],"영문 보도자료와 SNS 운영계획안(3월) 작성, 대학생 커뮤니티 확산 채널 정리","4월 기자간담회 프레스킷과 보도 결과 리포트 준비",["축전 팝업스토어 약 2–3주 현장 운영 (2025.4): 굿즈 판매, 아르바이트 인력 관리, 일일 판매·재고 운영보고 작성","img/palace-popup.jpg"],"가을 축전 준비까지 연계 운영","수주 제안서 자료조사와 캠페인 파트 작성"],
+ did:["수주 제안서 자료조사와 캠페인 파트 작성",["봄 축전(4.26–5.4) 국내 보도자료 직접 작성·배포 (개막, 사전 예약 매진, 유지태 오디오 가이드 참여, K-Heritage 마켓, 어린이 체험, 디즈니 협업 등)",["img/doc-palace-yoo-1.jpg","img/doc-palace-yoo-2.jpg","img/palace-open.jpg"]],"봄 13회·가을 7회, 연간 20회차 보도자료 배포 일정과 회차별 앵글 설계","기획기사 앵글 7건 발굴과 기자별 피칭안 작성 (개막제 감독 인터뷰, 최고령 궁이둥이, 디즈니 협업 전시 등)","신문·방송·외신·영자지를 3단계로 나눈 타깃 미디어 리스트 정리",["BusinessWire로 영문·중문 해외 보도자료 배포 운영","img/palace-poster.jpg"],"영문 보도자료와 SNS 운영계획안(3월) 작성, 대학생 커뮤니티 확산 채널 정리","4월 기자간담회 프레스킷과 보도 결과 리포트 준비",["축전 팝업스토어 약 2–3주 현장 운영 (2025.4): 굿즈 판매, 아르바이트 인력 관리, 일일 판매·재고 운영보고 작성","img/palace-popup.jpg"],"가을 축전 준비까지 연계 운영"],
  res:["봄 축전 기준 보도 536건 (국내 122 · 해외 414)","외국인 티켓 오픈 해외 보도자료(3.26) 221곳 게재, 조회 2,561회"],note:"담당 캠페인 전체 실적",
  links:[["보도 기사 보기 (스포츠서울)","https://www.sportsseoul.com/news/read/1509133"]]},
-{id:"stryker",sec:"campaign",also:["content","proposal"],focus:{proposal:[0]},keys:{proposal:"수주 제안서 시장 분석 → 연간 IMC 캠페인"},mine:"병원 영상 구성안 전체 작성, 촬영 진행",title:"Stryker Mako IMC와 병원 브랜디드 콘텐츠",client:"한국스트라이커",year:"2025.01–07",key:"대학병원 2곳 브랜디드 영상",tags:["헬스케어"],hc:1,
- cover:"img/mako-brand-c.jpg",covers:{content:"img/stryker-2.jpg"},imgs:["img/mako-brand.jpg","img/mako-web.jpg","img/stryker-video-4.jpg","img/stryker-2.jpg","img/stryker-1.jpg","img/stryker-3.jpg","img/stryker-academy.jpg","img/stryker-doc.jpg"],
+{id:"stryker",sec:"campaign",also:["content","proposal"],focus:{proposal:[0],content:[5,6,7,9]},keys:{proposal:"수주 제안서 시장 분석 → 연간 IMC 캠페인",content:"병원 영상 시나리오·구성안 직접 집필"},mine:"병원 영상 구성안 전체 작성, 촬영 진행",title:"Stryker Mako IMC와 병원 브랜디드 콘텐츠",client:"한국스트라이커",year:"2025.01–07",key:"대학병원 2곳 브랜디드 영상",tags:["헬스케어"],hc:1,
+ cover:"img/mako-brand-c.jpg",covers:{content:"img/doc-stryker-cover.jpg"},imgs:["img/mako-brand.jpg","img/mako-web.jpg","img/stryker-video-4.jpg","img/stryker-2.jpg","img/stryker-1.jpg","img/stryker-3.jpg","img/stryker-academy.jpg","img/stryker-doc.jpg"],
  role:"IMC 실무, 의료 브랜디드 콘텐츠 구성안·시나리오 전체 작성, 촬영 진행, 공식 홈페이지 운영",team:"4인 팀 (상무·과장·대리·사원)",
  figs:[["공개 영상","3개 채널"],["촬영 구성안","13차 수정"],["협업","대학병원 2곳"]],
  bg:"인공관절 수술 로봇 Mako를 환자와 보호자에게 정확하게 알리는 연간 통합 캠페인입니다. 광고 심의가 까다로운 의료기기라 브랜드를 앞세우기보다 의료진의 설명으로 신뢰를 쌓는 방식이 필요했습니다.",
- did:["2025년 PR 제안서의 시장 분석 작성: 인공관절·로봇수술 키워드 검색량 추이, 네이버 블로그 게시글 분석 (상업성 글 59.4% · 정보성 글 40.6%)",["Mako 공식 홈페이지 관리자 페이지 운영: 이미지·텍스트 콘텐츠 업데이트와 병원 찾기 정보 관리","img/mako-web.jpg"],"공중파 메인뉴스, 기획기사, 환자 만족도 서베이 등 IMC 프로그램 실무",["의료기기 전문 기자 13개 매체 대상 미디어 아카데미(2025.4.29) 운영, 연자로 나선 정형외과 교수의 강의 내용을 리포트로 정리","img/stryker-academy.jpg"],"유튜브 인스트림·실적 최대화(PMAX) 광고 운영 협의, 소재 사이즈별로 의료기기 광고심의 필요 여부 확인","의학 전문 유튜브 채널 굿라이프 협업 영상 기획·대본, 촬영 체크리스트 작성",["서울성모병원TV 다큐형 콘텐츠 촬영 구성안을 13차 수정까지 다듬어 완성하고 2일간 촬영 진행","img/stryker-1.jpg"],"한림대학교강남성심병원: 교수 인터뷰 질의서 작성, 수술실 촬영 2회와 교수 대담 촬영 진행 (5분 2편 · 15분 1편 구성)","병원 심의 의견(브랜드 강조 완화, 수술 정보 중심)을 반영한 재편집 조율과 프로젝트 인계서 작성",["슈팅오더, 컷리스트, 일일촬영표 등 촬영 진행 문서 작성과 현장 운영","img/stryker-doc.jpg"]],
+ did:["2025년 PR 제안서의 시장 분석 작성: 인공관절·로봇수술 키워드 검색량 추이, 네이버 블로그 게시글 분석 (상업성 글 59.4% · 정보성 글 40.6%)",["Mako 공식 홈페이지 관리자 페이지 운영: 이미지·텍스트 콘텐츠 업데이트와 병원 찾기 정보 관리","img/mako-web.jpg"],"공중파 메인뉴스, 기획기사, 환자 만족도 서베이 등 IMC 프로그램 실무",["의료기기 전문 기자 13개 매체 대상 미디어 아카데미(2025.4.29) 운영, 연자로 나선 정형외과 교수의 강의 내용을 리포트로 정리","img/stryker-academy.jpg"],"유튜브 인스트림·실적 최대화(PMAX) 광고 운영 협의, 소재 사이즈별로 의료기기 광고심의 필요 여부 확인","의학 전문 유튜브 채널 굿라이프 협업 영상 기획·대본, 촬영 체크리스트 작성",["서울성모병원TV 다큐형 콘텐츠: 교수 인터뷰 Q&A와 10분 내외 시나리오·촬영 구성안을 13차 수정까지 다듬어 완성하고 2일간 촬영 진행",["img/doc-stryker-scenario-1.jpg","img/doc-stryker-scenario-2.jpg","img/doc-stryker-scenario-3.jpg","img/stryker-1.jpg"]],["한림대학교강남성심병원: 교수 인터뷰 질의서와 촬영 구성안 작성, 수술실 촬영 2회와 교수 대담 촬영 진행 (5분 2편 · 15분 1편 구성)",["img/doc-stryker-qa-1.jpg","img/doc-stryker-qa-2.jpg","img/doc-stryker-hallym-1.jpg","img/doc-stryker-hallym-2.jpg"]],"병원 심의 의견(브랜드 강조 완화, 수술 정보 중심)을 반영한 재편집 조율과 프로젝트 인계서 작성",["슈팅오더, 컷리스트, 일일촬영표 등 촬영 진행 문서 작성과 현장 운영","img/stryker-doc.jpg"]],
  res:["굿라이프 협업 영상 공개 (2025.7)","서울성모병원TV 「무릎을 위한 정밀한 선택, 인공관절 로봇수술」 공개 (2025.9)"],note:"",
  links:[["굿라이프 영상 보기","https://www.youtube.com/watch?v=B-tQhYvqVBE"],["서울성모병원TV 영상 보기","https://www.youtube.com/watch?v=YEHBhQ_pqro"]]},
 {id:"mentor",sec:"campaign",mine:"캠페인 제안, 인플루언서 22인 섭외·운영, 결과 보고",title:"멘토 가성미 앱 인플루언서 캠페인",client:"J&J Mentor",year:"2025.06–07",key:"조회 102만 회",tags:["헬스케어"],hc:1,
@@ -370,21 +372,21 @@ const P=[
  role:"캠페인 제안, 인플루언서 섭외·운영, 결과 보고",team:"하이브월드와이드 디지털PR팀",
  figs:[["조회수","약 102만"],["발행률","100%"],["평균 참여율","3.83%"]],
  bg:"가슴성형 시뮬레이션 앱을 짧은 기간 안에 알려야 했습니다. 민감한 주제인 만큼 인플루언서의 채널 성격과 메시지 톤을 함께 관리하는 것이 핵심이었습니다.",
- did:["캠페인 제안서 작성","웰니스·감성·트렌디 등 콘텐츠 유형별로 인플루언서 후보를 고르고 메가 3인, 마이크로 19인 등 22인 섭외",["메가 인플루언서는 브랜드 핵심 타깃(30–40대 여성)에게 앱 정보와 사용 신뢰를, 마이크로는 팔로워 규모별 3개 그룹으로 나눠 USP 노출을 맡기는 2단 구성으로 운영","img/mentor-mega.jpg"],"릴스 발행 일정과 콘텐츠 관리 (7.4–7.21), 발행률 100%",["채널별 성과 집계와 결과보고서 작성: 댓글 반응을 '앱 관심·사용 니즈', '가슴성형 관련 긍정 반응', '인플루언서 호감'으로 나눠 분석","img/mentor-reaction.jpg"],"운영 인플루언서 대상 앱 만족도 설문 진행 (n=12)",["다음 단계 제안: 키닥터 세미나로 신뢰도를 높이고, 대형 카페 체험 캠페인으로 일반 타깃까지 넓히는 3단계 커뮤니케이션 플랜","img/mentor-next.jpg"]],
+ did:["캠페인 제안서 작성","웰니스·감성·트렌디 등 콘텐츠 유형별로 인플루언서 후보를 고르고 메가 3인, 마이크로 19인 등 22인 섭외",["메가 인플루언서는 브랜드 핵심 타깃(30–40대 여성)에게 앱 정보와 사용 신뢰를, 마이크로는 팔로워 규모별 3개 그룹으로 나눠 USP 노출을 맡기는 2단 구성으로 운영","img/mentor-mega.jpg"],"릴스 발행 일정과 콘텐츠 관리 (7.4–7.21), 발행률 100%",["채널별 성과 집계와 결과보고서 작성: 댓글 반응을 '앱 관심·사용 니즈', '가슴성형 관련 긍정 반응', '인플루언서 호감'으로 나눠 분석","img/mentor-reaction.jpg"],"운영 인플루언서 중 12명이 답한 앱 만족도 설문 진행",["다음 단계 제안: 키닥터 세미나로 신뢰도를 높이고, 대형 카페 체험 캠페인으로 일반 타깃까지 넓히는 3단계 커뮤니케이션 플랜","img/mentor-next.jpg"]],
  res:["조회수 약 102만 회, 인터랙션 약 4.2만 건","콘텐츠 참여율 평균 3.83% (채널 평균 대비 +1.13%p)"],note:"캠페인 전체 실적"},
 {id:"easyclaire",sec:"campaign",also:"content",focus:{content:[1,2,4]},keys:{content:"의사 유튜버 콘텐츠 메시지·가이드 설계"},mine:"규제 확인 후 과업 재설계, 매체·인플루언서 운영",title:"EasyClaire LED 마스크 캠페인",client:"코리아테크",year:"2024.03–07",key:"의사 유튜버 협업 · 조회 4.9만",tags:["헬스케어","뷰티"],hc:1,
- cover:"img/easy-brand-c.jpg",covers:{content:"img/easy-yt-4.jpg"},imgs:["img/easy-brand.jpg","img/easy-yt.jpg","img/easy-allure.jpg"],
+ cover:"img/easy-brand-c.jpg",covers:{content:"img/doc-easy-cover.jpg"},imgs:["img/easy-brand.jpg","img/easy-yt.jpg","img/easy-allure.jpg"],
  role:"매체·인플루언서 통합 캠페인 운영",team:"하이브월드와이드 디지털PR팀",
  figs:[["유튜브 브랜디드","4건"],["카드뉴스 채널","21곳"],["매거진·기획기사","9건"]],
  bg:"의료기기 인증을 받은 LED 마스크를 뷰티 기기 시장에서 차별화해야 했습니다. 신뢰를 주는 기사와 친근한 인플루언서 콘텐츠를 함께 쓰는 구성이었습니다.",
- did:["처음 계획한 피부과 체험존이 '의료기기 임대(판매)업' 관련 법적 문제에 걸리는 것을 확인하고, 온라인 콘텐츠 중심으로 과업을 다시 설계",["피부과 전문의 채널 3곳과 정보성 채널 1곳 유튜브 브랜디드 진행 (이동환TV 104만, 1분만 100만 등). 'LED 마스크는 의료기기인지부터 확인하라'는 메시지로 제품을 간접 노출","img/easy-yt.jpg"],["조선일보 기획기사 2건(4.17 · 4.24), ALLURE 5월호 어드버토리얼 진행","img/easy-allure.jpg"],"우먼센스·리빙센스 등 인스타그램 매거진 채널 6곳 콘텐츠, 브랜디드·PPL 바이럴 16건 운영",["유튜버별 스크립트 가이드 작성과 검수·수정: 의학 전문 채널부터 감성 채널까지 채널 말투에 맞추고, 의료기기 광고 심의 기준에 맞게 문구 조정. 인스타그램 정보 채널(파워페이지) 콘텐츠 기획안 작성","img/easy-yt-4.jpg"],"유튜브 영상을 다시 활용한 카드뉴스 21개 채널, 릴스 6개 채널 확산","결과보고서 작성: 정보성 채널 댓글의 부정 여론을 짚고, 전문의 채널 중심 2차 콘텐츠 방향 제안"],
+ did:["처음 계획한 피부과 체험존이 '의료기기 임대(판매)업' 관련 법적 문제에 걸리는 것을 확인하고, 온라인 콘텐츠 중심으로 과업을 다시 설계",["피부과 전문의 채널 3곳과 정보성 채널 1곳 유튜브 브랜디드 진행 (이동환TV 104만, 1분만 100만 등). 'LED 마스크는 의료기기인지부터 확인하라'는 메시지로 제품을 간접 노출","img/easy-yt.jpg"],["조선일보 기획기사 2건(4.17 · 4.24), ALLURE 5월호 어드버토리얼 진행","img/easy-allure.jpg"],"우먼센스·리빙센스 등 인스타그램 매거진 채널 6곳 콘텐츠, 브랜디드·PPL 바이럴 16건 운영",["유튜버별 스크립트 가이드 작성과 검수·수정: 의학 전문 채널부터 감성 채널까지 채널 말투에 맞추고, 의료기기 광고 심의 기준에 맞게 문구 조정. 인스타그램 정보 채널(파워페이지) 콘텐츠 기획안 작성",["img/doc-easy-guide-1.jpg","img/doc-easy-point-1.jpg","img/easy-yt-4.jpg"]],"유튜브 영상을 다시 활용한 카드뉴스 21개 채널, 릴스 6개 채널 확산","결과보고서 작성: 정보성 채널 댓글의 부정 여론을 짚고, 전문의 채널 중심 2차 콘텐츠 방향 제안"],
  res:["유튜브 브랜디드 총 조회 49,067회","인스타그램 매거진 좋아요 9,535회, 릴스 조회 21,570회","캠페인 성과를 바탕으로 같은 고객사의 다른 브랜드(리파) 프로젝트 추가 수주에 기여"],note:"2024.3–6 캠페인 전체 실적"},
-{id:"hyosim",sec:"campaign",also:"content",focus:{content:[1,2,3]},keys:{content:"카페 바이럴·광고 원고 직접 작성"},mine:"카페 바이럴 설계, 바이럴·광고 원고 작성",title:"효심원 흑염소진액 런칭 캠페인",client:"비엠에스코퍼레이션",year:"2024.07–09",key:"언론 보도 약 23건",tags:["식품·소비재"],
- cover:"img/hyosim-brand-c.jpg",covers:{content:"img/hyosim-viral.jpg"},imgs:["img/hyosim-brand.jpg","img/hyosim-product.jpg","img/hyosim-viral.jpg"],
+{id:"hyosim",sec:"campaign",also:"content",focus:{content:[1,2,3,4]},keys:{content:"카페 바이럴·광고 원고 직접 작성"},mine:"카페 바이럴 설계, 바이럴·광고 원고 작성",title:"효심원 흑염소진액 런칭 캠페인",client:"비엠에스코퍼레이션",year:"2024.07–09",key:"언론 보도 약 23건",tags:["식품·소비재"],
+ cover:"img/hyosim-brand-c.jpg",covers:{content:"img/doc-hyosim-cover.jpg"},imgs:["img/hyosim-brand.jpg","img/hyosim-product.jpg","img/hyosim-viral.jpg"],
  role:"카페 바이럴 기획, 바이럴·광고 원고 작성, 브랜드콘텐츠 광고 세팅",team:"하이브월드와이드 디지털PR팀",
  figs:[["카페 바이럴","45건"],["바이럴 조회","26,690회"],["런칭 PR 보도","약 12개 매체"]],
  bg:"건강식품 신제품의 첫 출시였습니다. 언론 보도로 신뢰를 만들고, 맘카페 등 실제 구매층이 모인 곳에서 이야기가 퍼지게 하는 것이 목표였습니다.",
- did:[["3040·맘카페·당뇨 관리 카페 등 실제 구매층이 모인 커뮤니티를 고르고 바이럴 대행사와 운영 조율","img/hyosim-viral.jpg"],"1차에는 '당 없는 흑염소 진액'이라는 정보만 퍼뜨리고, 2차에 브랜드를 언급하는 2단계 바이럴 설계","2차 카페 원고 5종 작성 (부모님 추석 선물, 수험생 체력 관리, 혈당 관리, 광고모델 활용 등)","네이버 브랜드콘텐츠 원고 2안 작성: '흑염소 진액 고르는 기준'형과 효능 소개형, 당류 0g·원물 30%를 타사 제품과 비교","브랜드콘텐츠 광고 세팅과 바이럴 일일 운영 보고"],
+ did:[["3040·맘카페·당뇨 관리 카페 등 실제 구매층이 모인 커뮤니티를 고르고 바이럴 대행사와 운영 조율","img/hyosim-viral.jpg"],"1차에는 '당 없는 흑염소 진액'이라는 정보만 퍼뜨리고, 2차에 브랜드를 언급하는 2단계 바이럴 설계",["카페 바이럴 원고 작성: 1차 정보형 원고와 2차 원고 5종 (부모님 추석 선물, 수험생 체력 관리, 혈당 관리, 광고모델 활용 등)",["img/doc-hyosim-cafe2-1.jpg","img/doc-hyosim-cafe2-2.jpg","img/doc-hyosim-cafe2-3.jpg","img/doc-hyosim-cafe1-1.jpg","img/doc-hyosim-cafe1-2.jpg"]],"네이버 브랜드콘텐츠 원고 2안 작성: '흑염소 진액 고르는 기준'형과 효능 소개형, 당류 0g·원물 30%를 타사 제품과 비교",["런칭 보도자료 작성 (2024.8.8 「'효심원, 노당안심 흑염소진액' 론칭, 혈당건강시장 포문」)",["img/doc-hyosim-press-1.jpg","img/doc-hyosim-press-2.jpg"]],"브랜드콘텐츠 광고 세팅과 바이럴 일일 운영 보고"],
  res:["카페 바이럴 45건 배포, 조회 26,690회 · 댓글 209건 (8.14–9.5)","8월 런칭 PR로 뉴시스·뉴스1·헬스조선 등 약 12개 매체 보도, 9월 추석 PR로 약 11개 매체 추가 보도"],note:"언론 보도는 캠페인 전체 실적"},
 {id:"supporters",sec:"campaign",mine:"운영 계획·가이드북 제작, 서포터즈 20명 활동 관리",title:"국민취업지원제도 4060 서포터즈",client:"고용노동부",year:"2025.03–07",key:"중장년 서포터즈 20명 운영",tags:["공공"],
  cover:"img/supporters-1.jpg",imgs:["img/supporters-1.jpg","img/supporters-5.jpg","img/supporters-10.jpg","img/supporters-14.jpg"],
@@ -412,14 +414,14 @@ const P=[
  role:"다큐 시리즈 전 회차 원고, 현장 취재·담당자 미팅, 현장 연출",team:"프리랜서",
  figs:[["시리즈","총 12편"],["현장 취재","전 회차"],["검수","회차별 산업부 확정"]],
  bg:"전국의 수소 인프라를 직접 찾아가 일반인에게 수소 에너지를 쉽게 설명하는 다큐 시리즈입니다. 기술 용어가 많은 분야라 정확성과 쉬운 설명을 동시에 잡아야 했습니다.",
- did:[["인천 수소생산기지, 여수 출하센터, 충주 바이오수소, 제주 수소생산단지, 창원 액화수소플랜트 등 전 회차 현장 방문","img/hydrogen-thumb.jpg"],["사업소 담당자와 직접 연락하며 회사소개서·사업계획서로 공부해 회차별 사전 구성안과 원고 작성. 택배 상자, 지폐, 블루투스 이어폰 같은 생활 소품에 빗대 수소 원리를 설명","img/hydrogen-script.jpg"],"수소안전뮤지엄, H2meet 박람회 연계, '수소의 날' 특집 구성","각 편마다 산업부 검수를 여러 차례 거쳐 최종 확정"],
+ did:[["인천 수소생산기지, 여수 출하센터, 충주 바이오수소, 제주 수소생산단지, 창원 액화수소플랜트 등 전 회차 현장 방문","img/hydrogen-thumb.jpg"],["사업소 담당자와 직접 연락하며 회사소개서·사업계획서로 공부해 회차별 사전 구성안과 원고 작성. 택배 상자, 지폐, 블루투스 이어폰 같은 생활 소품에 빗대 수소 원리를 설명",["img/hydrogen-script.jpg","img/doc-hydrogen1-1.jpg","img/doc-hydrogen1-2.jpg","img/doc-hydrogen1-3.jpg","img/doc-hydrogen5-1.jpg","img/doc-hydrogen5-2.jpg"]],"수소안전뮤지엄, H2meet 박람회 연계, '수소의 날' 특집 구성","각 편마다 산업부 검수를 여러 차례 거쳐 최종 확정"],
  res:["시즌 전 회차 원고를 납품하고 산업부 확정 완료"],note:""},
 {id:"soyang",sec:"content",title:"소양강댐 준공 50주년 물문화관 영상",client:"한국수자원공사 (K-water)",year:"2023.07–10",key:"대통령 행사 대표 영상 선정",tags:["공공"],
  cover:"img/soyang-history-1.jpg",imgs:["img/soyang-history-1.jpg","img/soyang-history-2.jpg","img/soyang-history-3.jpg","img/soyang-history-4.jpg","img/soyang-drone-1.jpg","img/soyang-drone-2.jpg","img/soyang-drone-3.jpg","img/soyang-now-title.jpg","img/soyang-now-1.jpg","img/soyang-now-2.jpg","img/soyang-family-1.jpg","img/soyang-family-2.jpg","img/soyang-family-3.jpg","img/soyang-family-4.jpg","img/soyang-1973.jpg"],
  role:"영상 콘텐츠 4종 구성안·원고 전체, 촬영 현장 진행, 기념 열차 래핑 일정 조율",team:"프리랜서",
  figs:[["영상 콘텐츠","4종"],["구성안·원고","전량 집필"],["기념 열차","2023.8"]],
  bg:"준공 50주년을 맞은 소양강댐 물문화관에서 상영할 영상들입니다. 같은 댐 이야기를 관람객이 지루하지 않게 볼 수 있도록 형식을 서로 다르게 설계해야 했습니다.",
- did:[["영상 4종 구성안과 원고 집필: 드론 영상(세로형), 인터뷰 영상 「소양강댐은 지금」, 역사 토크 영상 「역사 속의 소양강 댐」, 가족 드라마 「로운이네 가족일기」","img/soyang-drone-2.jpg"],["「역사 속의 소양강 댐」(2023.8): 6·25 이후 경제개발계획, 사력댐 건설 비화 등 사료를 바탕으로 역사 강사와 학생들의 대화형 시나리오 집필. 댐의 성과 뒤에 있는 수몰민의 희생을 짚고, 물문화관 수몰민전시관 홍보까지 엮음","img/soyang-history-script.jpg"],["「소양강댐은 지금」(2023.9): 임직원·지역 주민·전문가 등 8–10인 출연진 섭외 기준과 인물별 인터뷰 질문지 작성. '소양강댐은 이전에'로 묻고 '소양강댐은 지금'으로 답하는 흐름을 타이포그래피 자막으로 구성","img/soyang-now-script.jpg"],["「로운이네 가족일기」: 아이와 가족이 소양강댐과 물문화관을 둘러보며 댐의 역할을 알아가는 가족 드라마 구성","img/soyang-family-2.jpg"],["1973년 준공식 등 기록 사진 자료 정리","img/soyang-1973.jpg"],"물문화관 촬영 현장 진행","50주년 기념 테마열차 래핑 일정 조율"],
+ did:[["영상 4종 구성안과 원고 집필: 드론 영상(세로형), 인터뷰 영상 「소양강댐은 지금」, 역사 토크 영상 「역사 속의 소양강 댐」, 가족 드라마 「로운이네 가족일기」",["img/soyang-drone-2.jpg","img/doc-soyang-drone-1.jpg","img/doc-soyang-drone-2.jpg"]],["「역사 속의 소양강 댐」(2023.8): 6·25 이후 경제개발계획, 사력댐 건설 비화 등 사료를 바탕으로 역사 강사와 학생들의 대화형 시나리오 집필. 댐의 성과 뒤에 있는 수몰민의 희생을 짚고, 물문화관 수몰민전시관 홍보까지 엮음",["img/soyang-history-script.jpg","img/doc-soyang-history-1.jpg","img/doc-soyang-history-2.jpg","img/doc-soyang-history-3.jpg"]],["「소양강댐은 지금」(2023.9): 임직원·지역 주민·전문가 등 8–10인 출연진 섭외 기준과 인물별 인터뷰 질문지 작성. '소양강댐은 이전에'로 묻고 '소양강댐은 지금'으로 답하는 흐름을 타이포그래피 자막으로 구성",["img/soyang-now-script.jpg","img/doc-soyang-now-1.jpg","img/doc-soyang-now-2.jpg","img/doc-soyang-now-3.jpg"]],["「로운이네 가족일기」: 아이와 가족이 소양강댐과 물문화관을 둘러보며 댐의 역할을 알아가는 가족 드라마 구성","img/soyang-family-2.jpg"],["1973년 준공식 등 기록 사진 자료 정리","img/soyang-1973.jpg"],"물문화관 촬영 현장 진행","50주년 기념 테마열차 래핑 일정 조율"],
  res:["4종 영상 완성, 홍보영상 예고편 공개","대통령 행사 대표 영상으로 선정"],note:"1973년 준공식 사진은 발주처가 제공한 기록 자료입니다"},
 {id:"antiterror",sec:"content",title:"장병 테러예방 교육영상",client:"국군방첩사령부",year:"2023.10–12",key:"국군 장병 교육영상 2편",tags:["국방"],
  cover:"img/antiterror-c.jpg",imgs:["img/antiterror-title.jpg"],
@@ -433,13 +435,14 @@ const P=[
  role:"사내 콘텐츠 기획, 영상 구성안 작성, 사내 이벤트 설계",team:"PR 그룹",
  figs:[["ESG 카드뉴스","60편+"],["유튜브 시리즈","8편"],["퀴즈 문항","약 250개"]],
  bg:"조직개편과 사명 변경이 이어지던 시기, 임직원이 회사의 사업과 ESG 방향을 이해하도록 돕는 사내 콘텐츠를 맡았습니다. 부서마다 알리고 싶은 내용을 받아 직접 공부하고, 전달 목적에 맞는 형식을 골랐습니다.",
- did:["ESG 실천 가이드 카드뉴스 60편 이상 장기 운영",["유튜브 「진격의 지구소녀」 8편 전 회차 스크립트: 사명 변경 시기, 폐기물(E-waste) 등 새 환경 사업을 '미스터리 취재'와 에스파 'Next Level'·'그것이 알고 싶다' 패러디 같은 웹 예능 형식으로 소개","img/sk-earthgirl-script.jpg"],"취재형·대담형·강의형으로 나눈 사내 영상 구성안 작성 (현장 안전 앱 '안심', GTX-A 품질안전 워크숍, 지속가능경영보고서 등)",["사내 퀴즈 이벤트 Quiz Marble 문항 집필과 게임 룰 설계 (6개 분야, 예선 3라운드와 결선, 전 BU 24명 참가)","img/sk-quiz.jpg"],["AI 캐릭터가 각 BU 담당자를 인터뷰하는 대화형 콘텐츠 「SK 담당자 나오세요」 기획 (2022.2)","img/sk-damdang-title.jpg"]],
+ did:["ESG 실천 가이드 카드뉴스 60편 이상 장기 운영",["유튜브 「진격의 지구소녀」 8편 전 회차 스크립트: 사명 변경 시기, 폐기물(E-waste) 등 새 환경 사업을 '미스터리 취재'와 에스파 'Next Level'·'그것이 알고 싶다' 패러디 같은 웹 예능 형식으로 소개",["img/sk-earthgirl-script.jpg","img/doc-sk-earthgirl7-1.jpg","img/doc-sk-earthgirl7-2.jpg","img/doc-sk-earthgirlfinal-1.jpg","img/doc-sk-earthgirlfinal-2.jpg"]],["취재형·대담형·강의형으로 나눈 사내 영상 구성안 작성 (「데이터로 보는 SK에코플랜트」, 지속가능경영보고서 콘텐츠, 현장 안전 앱 '안심', GTX-A 품질안전 워크숍 등)",["img/doc-sk-data-1.jpg","img/doc-sk-data-2.jpg","img/doc-sk-esg-1.jpg","img/doc-sk-esg-2.jpg"]],["사내 퀴즈 이벤트 Quiz Marble 문항 집필과 게임 룰 설계 (6개 분야, 예선 3라운드와 결선, 전 BU 24명 참가)","img/sk-quiz.jpg"],["AI 캐릭터가 각 BU 담당자를 인터뷰하는 대화형 콘텐츠 「SK 담당자 나오세요」 기획 (2022.2)","img/sk-damdang-title.jpg"]],
  res:["2년간 사내 콘텐츠 정기 운영","생성형 AI 보급 전 AI 캐릭터를 활용한 사내 콘텐츠 시도"],note:""}
 ];
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const $=s=>document.querySelector(s);
 
-const T=x=>Array.isArray(x)?x:[x,null];
+/* 세부 업무: "문장" 또는 ["문장","img/a.jpg"] 또는 ["문장",["img/a.jpg","img/b.jpg"]] */
+const T=x=>Array.isArray(x)?[x[0],[].concat(x[1]||[])]:[x,[]];
 const typoCover=(t,alt)=>`<div class="cover"><div class="typo${alt?" alt":""}"><div class="big">${esc(t[0])}</div><div class="cap-l">${esc(t[1])}</div></div></div>`;
 function cover(p,sec){
   const c=(p.covers&&p.covers[sec])||p.cover;
@@ -461,15 +464,15 @@ document.querySelectorAll("[data-grid]").forEach(g=>{
 });
 
 let lastFocus=null,curP=null;
-function imgsOf(p){ const a=[...(p.imgs||[])]; p.did.forEach(x=>{const [,i]=T(x); if(i&&!a.includes(i)) a.push(i);}); return a; }
+function imgsOf(p){ const a=[...(p.imgs||[])]; p.did.forEach(x=>T(x)[1].forEach(i=>{ if(!a.includes(i)) a.push(i); })); return a; }
 function openSheet(id,sec){
   const p=P.find(x=>x.id===id); if(!p) return; curP=p;
   const all=imgsOf(p);
   const gal=p.imgs?`<div class="gallery${p.imgs.length===1?" one":""}">${p.imgs.map(s=>`<button type="button" data-z="${all.indexOf(s)}" aria-label="크게 보기"><img src="${s}" alt="${esc(p.title)} 자료">${lab(s)}</button>`).join("")}</div>`
     :`<div class="gtypo">${cover(p).replace('class="cover"','class="cover" style="aspect-ratio:auto;height:200px"')}</div>`;
-  const tasks=p.did.map((x,k)=>{const [tx,im]=T(x);
+  const tasks=p.did.map((x,k)=>{const [tx,ims]=T(x),im=ims[0];
     const tags=Object.keys(FOCUS).filter(f=>p.focus&&p.focus[f]&&p.focus[f].includes(k));
-    return `<div class="task${im?" withimg":""}${tags.includes(sec)?" hl":""}"><span class="no">${String(k+1).padStart(2,"0")}</span><div class="tx">${tags.map(f=>`<span class="wtag">${FOCUS[f]}</span>`).join("")}${esc(tx)}</div>${im?`<button type="button" data-z="${all.indexOf(im)}" aria-label="업무 ${k+1} 자료 크게 보기"><img src="${im}" alt=""${/script|storyboard/.test(im)?' class="fit"':""} loading="lazy">${lab(im)}</button>`:""}</div>`;}).join("");
+    return `<div class="task${im?" withimg":""}${tags.includes(sec)?" hl":""}"><span class="no">${String(k+1).padStart(2,"0")}</span><div class="tx">${tags.map(f=>`<span class="wtag">${FOCUS[f]}</span>`).join("")}${esc(tx)}</div>${im?`<button type="button" data-k="${k}" aria-label="업무 ${k+1} 자료 ${ims.length}장 크게 보기"><img src="${im}" alt=""${/script|storyboard|\/doc-/.test(im)?' class="fit"':""} loading="lazy">${lab(im)}${ims.length>1?`<span class="more">${ims.length}장</span>`:""}</button>`:""}</div>`;}).join("");
   $("#sheet").innerHTML=`<button type="button" class="close" id="close">닫기</button>${gal}
   <div class="d">
     <h2 id="dTitle">${esc(p.title)}</h2>
@@ -493,14 +496,15 @@ function closeSheet(){ $("#overlay").hidden=true; document.body.classList.remove
 
 /* lightbox */
 let lbList=[],idx=0;
-function show(){ $("#lbImg").src=lbList[idx]; $("#lbImg").alt=curP.title; $("#lbCap").textContent=`${curP.title} · ${idx+1} / ${lbList.length}`+(CAP[lbList[idx]]?` · ${CAP[lbList[idx]]}`:"");
+function show(){ $("#lbImg").src=lbList[idx]; $("#lbImg").alt=curP.title; $("#lbCap").textContent=`${curP.title} · ${idx+1} / ${lbList.length}`+(capOf(lbList[idx])?` · ${capOf(lbList[idx])}`:"");
   $("#lbPrev").hidden=$("#lbNext").hidden=lbList.length<2; }
-function openLb(i){ lbList=imgsOf(curP); idx=i; show(); $("#lb").hidden=false; $("#lbClose").focus(); }
+function openLb(i,list){ lbList=list||imgsOf(curP); idx=i; show(); $("#lb").hidden=false; $("#lbClose").focus(); }
 function closeLb(){ $("#lb").hidden=true; $("#close")&&$("#close").focus(); }
 document.addEventListener("click",e=>{
   const j=e.target.closest("[data-open]"); if(j){openSheet(j.dataset.open);return;}
   const c=e.target.closest(".card"); if(c){openSheet(c.dataset.id,c.dataset.sec);return;}
   const z=e.target.closest("[data-z]"); if(z){openLb(+z.dataset.z);return;}
+  const tk=e.target.closest("[data-k]"); if(tk){openLb(0,T(curP.did[+tk.dataset.k])[1]);return;}
   if(e.target.id==="close"||e.target.id==="overlay"){closeSheet();return;}
   if(e.target.id==="lbClose"||e.target.classList.contains("lb-img")) closeLb();
   if(e.target.id==="lbPrev"){idx=(idx-1+lbList.length)%lbList.length;show();}
