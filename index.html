@@ -105,7 +105,8 @@ section.cap{padding-block:56px 0;scroll-margin-top:64px}
 .sheet .close{position:absolute;top:12px;right:12px;font:inherit;font-size:14px;border:1px solid var(--rule);background:var(--sheet);color:var(--ink);border-radius:999px;padding:4px 14px;cursor:pointer;z-index:2}
 .gallery{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(80%,1fr);gap:6px;overflow-x:auto;background:#10131a;scroll-snap-type:x mandatory}
 .gallery.one{grid-auto-columns:100%}
-.gallery button{all:unset;cursor:zoom-in;scroll-snap-align:start}
+.gallery button{all:unset;cursor:zoom-in;scroll-snap-align:start;position:relative}
+.glabel{position:absolute;left:8px;bottom:8px;font-size:11.5px;line-height:1.4;background:rgba(10,12,18,.72);color:#fff;padding:2px 8px;border-radius:4px;pointer-events:none}
 .gallery img{width:100%;height:360px;object-fit:contain;display:block;background:#10131a}
 .gtypo{height:200px;position:relative}
 .d{padding:28px 30px 36px;display:grid;gap:26px}
@@ -125,7 +126,7 @@ section.cap{padding-block:56px 0;scroll-margin-top:64px}
 .task.withimg{grid-template-columns:44px minmax(0,1fr) minmax(0,220px)}
 .task .no{font-family:var(--mono);font-size:13px;color:var(--accent);padding-top:2px}
 .task .tx{font-size:15.5px;line-height:1.65}
-.task button{all:unset;cursor:zoom-in;display:block;border-radius:6px;overflow:hidden;border:1px solid var(--rule);aspect-ratio:16/10;max-width:100%}
+.task button{all:unset;cursor:zoom-in;display:block;position:relative;border-radius:6px;overflow:hidden;border:1px solid var(--rule);aspect-ratio:16/10;max-width:100%}
 .task button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .task img{width:100%;height:100%;object-fit:cover;display:block}
 .res{background:var(--sheet);border:1px solid var(--rule);border-radius:8px;padding:14px 16px}
@@ -291,6 +292,15 @@ footer button{font:inherit;font-size:14px;border:1px solid var(--rule);backgroun
 </div>
 
 <script>
+/* 사진 아래 작은 표시. 재우가 만들지 않은 사진은 여기서 밝힘 */
+const CAP={
+ "img/easy-brand.jpg":"브랜드 공식 이미지","img/easy-brand-c.jpg":"브랜드 공식 이미지",
+ "img/hyosim-brand.jpg":"브랜드 공식 이미지","img/hyosim-brand-c.jpg":"브랜드 공식 이미지",
+ "img/mako-brand.jpg":"브랜드 공식 이미지","img/mako-brand-c.jpg":"브랜드 공식 홈페이지",
+ "img/mako-web.jpg":"Mako 공식 홈페이지",
+ "img/supporters-truck.jpg":"같은 디자인의 이전 행사 사진 (참고)"
+};
+const lab=src=>CAP[src]?`<span class="glabel">${esc(CAP[src])}</span>`:"";
 const P=[
 {id:"squidgame",sec:"campaign",title:"오징어 게임: 더 익스피리언스 서울 캠페인",client:"넷플릭스 IP 체험 전시",year:"2024.12–2025.04",key:"광고 노출 644만 회",tags:["엔터테인먼트"],
  cover:"img/squid-1.jpg",imgs:["img/squid-1.jpg","img/squid-street-2.jpg","img/squid-street-3.jpg","img/squid-street-1.jpg","img/squid-2.jpg","img/squid-3.jpg","img/squid-4.jpg","img/squid-5.jpg","img/squid-6.jpg","img/squid-kv.jpg","img/squid-web.jpg"],
@@ -307,7 +317,7 @@ const P=[
  did:[["봄 축전(4.26–5.4) 국내 보도자료 직접 작성·배포","img/palace-open.jpg"],"봄 13회·가을 7회, 연간 20회차 보도자료 배포 일정과 회차별 앵글 설계","기획기사 앵글 7건 발굴과 기자별 피칭안 작성 (개막제 감독 인터뷰, 최고령 궁이둥이, 디즈니 협업 전시 등)","신문·방송·외신·영자지를 3단계로 나눈 타깃 미디어 리스트 정리",["BusinessWire로 영문·중문 해외 보도자료 배포 운영","img/palace-poster.jpg"],"4월 기자간담회 프레스킷과 보도 결과 리포트 준비",["축전 팝업스토어 굿즈 판매 운영과 일일 판매·재고 운영보고 작성 (2025.4)","img/palace-popup.jpg"],"가을 축전 준비까지 연계 운영","수주 제안서 자료조사와 캠페인 파트 작성"],
  res:["봄 축전 기준 보도 536건 (국내 122 · 해외 414)","외국인 티켓 오픈 해외 보도자료(3.26) 221곳 게재, 조회 2,561회"],note:"담당 캠페인 전체 실적"},
 {id:"stryker",sec:"campaign",also:"content",title:"Stryker Mako IMC와 병원 브랜디드 콘텐츠",client:"한국스트라이커",year:"2025.01–07",key:"대학병원 2곳 브랜디드 영상",tags:["헬스케어"],hc:1,
- cover:"img/stryker-2.jpg",imgs:["img/stryker-2.jpg","img/stryker-1.jpg","img/stryker-3.jpg","img/stryker-academy.jpg","img/stryker-doc.jpg"],
+ cover:"img/mako-brand-c.jpg",covers:{content:"img/stryker-2.jpg"},imgs:["img/mako-brand.jpg","img/mako-web.jpg","img/stryker-2.jpg","img/stryker-1.jpg","img/stryker-3.jpg","img/stryker-academy.jpg","img/stryker-doc.jpg"],
  role:"IMC 실무, 의료 브랜디드 콘텐츠 구성안·시나리오 전체 작성, 촬영 진행",team:"4인 팀 (상무·과장·대리·사원)",
  figs:[["공개 영상","3개 채널"],["촬영 구성안","13차 수정"],["협업","대학병원 2곳"]],
  bg:"인공관절 수술 로봇 Mako를 환자와 보호자에게 정확하게 알리는 연간 통합 캠페인입니다. 광고 심의가 까다로운 의료기기라 브랜드를 앞세우기보다 의료진의 설명으로 신뢰를 쌓는 방식이 필요했습니다.",
@@ -322,14 +332,14 @@ const P=[
  did:["캠페인 제안서 작성","웰니스·감성·트렌디 등 콘텐츠 유형별로 인플루언서 후보를 고르고 메가 3인, 마이크로 19인 등 22인 섭외",["메가 인플루언서는 브랜드 핵심 타깃(30–40대 여성)에게 앱 정보와 사용 신뢰를, 마이크로는 팔로워 규모별 3개 그룹으로 나눠 USP 노출을 맡기는 2단 구성으로 운영","img/mentor-mega.jpg"],"릴스 발행 일정과 콘텐츠 관리 (7.4–7.21), 발행률 100%",["채널별 성과 집계와 결과보고서 작성: 댓글 반응을 '앱 관심·사용 니즈', '가슴성형 관련 긍정 반응', '인플루언서 호감'으로 나눠 분석","img/mentor-reaction.jpg"],"운영 인플루언서 대상 앱 만족도 설문 진행 (n=12)",["다음 단계 제안: 키닥터 세미나로 신뢰도를 높이고, 대형 카페 체험 캠페인으로 일반 타깃까지 넓히는 3단계 커뮤니케이션 플랜","img/mentor-next.jpg"]],
  res:["조회수 약 102만 회, 인터랙션 약 4.2만 건","콘텐츠 참여율 평균 3.83% (채널 평균 대비 +1.13%p)"],note:"캠페인 전체 실적"},
 {id:"easyclaire",sec:"campaign",title:"EasyClaire LED 마스크 캠페인",client:"코리아테크",year:"2024.03–07",key:"의사 유튜버 협업 · 조회 4.9만",tags:["헬스케어","뷰티"],hc:1,
- cover:"img/easy-yt.jpg",imgs:["img/easy-yt.jpg","img/easy-allure.jpg"],
+ cover:"img/easy-brand-c.jpg",imgs:["img/easy-brand.jpg","img/easy-yt.jpg","img/easy-allure.jpg"],
  role:"매체·인플루언서 통합 캠페인 운영",team:"하이브월드와이드 디지털PR팀",
  figs:[["유튜브 브랜디드","4건"],["카드뉴스 채널","21곳"],["매거진·기획기사","9건"]],
  bg:"의료기기 인증을 받은 LED 마스크를 뷰티 기기 시장에서 차별화해야 했습니다. 신뢰를 주는 기사와 친근한 인플루언서 콘텐츠를 함께 쓰는 구성이었습니다.",
  did:["처음 계획한 피부과 체험존이 '의료기기 임대(판매)업' 관련 법적 문제에 걸리는 것을 확인하고, 온라인 콘텐츠 중심으로 과업을 다시 설계",["피부과 전문의 채널 3곳과 정보성 채널 1곳 유튜브 브랜디드 진행 (이동환TV 104만, 1분만 100만 등). 'LED 마스크는 의료기기인지부터 확인하라'는 메시지로 제품을 간접 노출","img/easy-yt.jpg"],["조선일보 기획기사 2건(4.17 · 4.24), ALLURE 5월호 어드버토리얼 진행","img/easy-allure.jpg"],"우먼센스·리빙센스 등 인스타그램 매거진 채널 6곳 콘텐츠, 브랜디드·PPL 바이럴 16건 운영","유튜브 영상을 다시 활용한 카드뉴스 21개 채널, 릴스 6개 채널 확산","결과보고서 작성: 정보성 채널 댓글의 부정 여론을 짚고, 전문의 채널 중심 2차 콘텐츠 방향 제안"],
  res:["유튜브 브랜디드 총 조회 49,067회","인스타그램 매거진 좋아요 9,535회, 릴스 조회 21,570회","캠페인 성과를 바탕으로 같은 고객사의 다른 브랜드(리파) 프로젝트 추가 수주에 기여"],note:"2024.3–6 캠페인 전체 실적"},
 {id:"hyosim",sec:"campaign",title:"효심원 흑염소진액 런칭 캠페인",client:"비엠에스코퍼레이션",year:"2024.07–09",key:"언론 보도 약 23건",tags:["식품·소비재"],
- cover:"img/hyosim-product.jpg",imgs:["img/hyosim-product.jpg","img/hyosim-viral.jpg"],
+ cover:"img/hyosim-brand-c.jpg",imgs:["img/hyosim-brand.jpg","img/hyosim-product.jpg","img/hyosim-viral.jpg"],
  role:"카페 바이럴 기획, 바이럴·광고 원고 작성, 브랜드콘텐츠 광고 세팅",team:"하이브월드와이드 디지털PR팀",
  figs:[["카페 바이럴","45건"],["바이럴 조회","26,690회"],["런칭 PR 보도","약 12개 매체"]],
  bg:"건강식품 신제품의 첫 출시였습니다. 언론 보도로 신뢰를 만들고, 맘카페 등 실제 구매층이 모인 곳에서 이야기가 퍼지게 하는 것이 목표였습니다.",
@@ -340,7 +350,7 @@ const P=[
  role:"서포터즈 운영 기획, 모집, 운영 가이드북 제작, 활동 관리",team:"하이브월드와이드 공공 홍보팀",
  figs:[["전국 선발","20명"],["대상 연령","만 40–69세"],["운영 기간","약 6개월"]],
  bg:"청년 위주로 운영되던 정책 서포터즈를, 실제로 제도가 필요한 중장년층까지 넓히는 첫 시도였습니다. 대상이 바뀐 만큼 모집 방식과 활동 미션도 새로 짜야 했습니다.",
- did:[["중장년층 대상 서포터즈 운영계획 수립, 고용노동부·지청 SNS와 제도 이용자 대상 안내 메일로 모집 홍보 (3.24–4.16)","img/supporters-5.jpg"],"월간 운영 규칙 설계: 매월 1일 주제 공지 → 5일 활동계획서 → 25일 콘텐츠 제출, 블로그·인스타그램·유튜브별 콘텐츠 기준 마련",["27쪽 분량 운영 가이드북과 월별 미션 가이드 제작, 발대식(4.29, 서울고용센터)에서 서포터즈 역할·가이드 교육 진행","img/supporters-1.jpg"],["3개월간 활동 콘텐츠 관리와 우수 서포터즈 인센티브 운영","img/supporters-14.jpg"],"중장년이 많이 찾는 일자리 박람회에 커피트럭과 현장 상담 부스를 세우는 '취업이룸 커피트럭' 캠페인 기획·운영"],
+ did:[["중장년층 대상 서포터즈 운영계획 수립, 고용노동부·지청 SNS와 제도 이용자 대상 안내 메일로 모집 홍보 (3.24–4.16)","img/supporters-5.jpg"],"월간 운영 규칙 설계: 매월 1일 주제 공지 → 5일 활동계획서 → 25일 콘텐츠 제출, 블로그·인스타그램·유튜브별 콘텐츠 기준 마련",["27쪽 분량 운영 가이드북과 월별 미션 가이드 제작, 발대식(4.29, 서울고용센터)에서 서포터즈 역할·가이드 교육 진행","img/supporters-1.jpg"],["3개월간 활동 콘텐츠 관리와 우수 서포터즈 인센티브 운영","img/supporters-14.jpg"],["중장년이 많이 찾는 일자리 박람회에 커피트럭과 현장 상담 부스를 세우는 '취업이룸 커피트럭' 캠페인 기획·운영","img/supporters-truck.jpg"]],
  res:["발대식부터 수료식(8.7)까지 전 과정 기획","준비 기간 포함 약 6개월, 서포터즈 실제 활동 5–7월"],note:""},
 {id:"pension",sec:"proposal",title:"2025 국민연금 정책홍보 제안 「미래지하철」",client:"보건복지부 · 국민연금공단",year:"2025.04",key:"대표 카피·캠페인 컨셉 기획",tags:["공공"],
  cover:"img/pension-2.jpg",imgs:["img/pension-2.jpg","img/pension-3.jpg","img/pension-1.jpg"],
@@ -389,18 +399,19 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",
 const $=s=>document.querySelector(s);
 
 const T=x=>Array.isArray(x)?x:[x,null];
-function cover(p){
+function cover(p,sec){
   if(!p.imgs) return `<div class="cover"><div class="typo${p.alt?" alt":""}"><div class="big">${esc(p.typo[0])}</div><div class="cap-l">${esc(p.typo[1])}</div></div></div>`;
-  return `<div class="cover"><img src="${p.cover}" alt="" loading="lazy"></div>`;
+  const c=(p.covers&&p.covers[sec])||p.cover;
+  return `<div class="cover"><img src="${c}" alt="" loading="lazy">${lab(c)}</div>`;
 }
-function card(p){
-  return `<button type="button" class="card" data-id="${p.id}" data-hc="${p.hc?1:0}">${cover(p)}
+function card(p,sec){
+  return `<button type="button" class="card" data-id="${p.id}" data-hc="${p.hc?1:0}">${cover(p,sec)}
     <div class="cbody"><div class="ttl">${esc(p.title)}</div><div class="sub">${esc(p.client)} · <span class="yr">${esc(p.year)}</span></div>${p.key?`<div class="key"><span>${esc(p.key)}</span></div>`:""}
     <div class="tags">${p.tags.map(t=>`<span class="tag${t==="헬스케어"?" hc":""}">#${esc(t)}</span>`).join("")}</div>
     <div class="open">세부 업무 ${p.did.length}건 보기 →</div></div></button>`;
 }
 document.querySelectorAll("[data-grid]").forEach(g=>{
-  const s=g.dataset.grid; g.innerHTML=P.filter(p=>p.sec===s||p.also===s).map(card).join("");
+  const s=g.dataset.grid; g.innerHTML=P.filter(p=>p.sec===s||p.also===s).map(p=>card(p,s)).join("");
 });
 
 let lastFocus=null,curP=null;
@@ -408,10 +419,10 @@ function imgsOf(p){ const a=[...(p.imgs||[])]; p.did.forEach(x=>{const [,i]=T(x)
 function openSheet(id){
   const p=P.find(x=>x.id===id); if(!p) return; curP=p;
   const all=imgsOf(p);
-  const gal=p.imgs?`<div class="gallery${p.imgs.length===1?" one":""}">${p.imgs.map(s=>`<button type="button" data-z="${all.indexOf(s)}" aria-label="크게 보기"><img src="${s}" alt="${esc(p.title)} 자료"></button>`).join("")}</div>`
+  const gal=p.imgs?`<div class="gallery${p.imgs.length===1?" one":""}">${p.imgs.map(s=>`<button type="button" data-z="${all.indexOf(s)}" aria-label="크게 보기"><img src="${s}" alt="${esc(p.title)} 자료">${lab(s)}</button>`).join("")}</div>`
     :`<div class="gtypo">${cover(p).replace('class="cover"','class="cover" style="aspect-ratio:auto;height:200px"')}</div>`;
   const tasks=p.did.map((x,k)=>{const [tx,im]=T(x);
-    return `<div class="task${im?" withimg":""}"><span class="no">${String(k+1).padStart(2,"0")}</span><div class="tx">${esc(tx)}</div>${im?`<button type="button" data-z="${all.indexOf(im)}" aria-label="업무 ${k+1} 자료 크게 보기"><img src="${im}" alt="" loading="lazy"></button>`:""}</div>`;}).join("");
+    return `<div class="task${im?" withimg":""}"><span class="no">${String(k+1).padStart(2,"0")}</span><div class="tx">${esc(tx)}</div>${im?`<button type="button" data-z="${all.indexOf(im)}" aria-label="업무 ${k+1} 자료 크게 보기"><img src="${im}" alt="" loading="lazy">${lab(im)}</button>`:""}</div>`;}).join("");
   $("#sheet").innerHTML=`<button type="button" class="close" id="close">닫기</button>${gal}
   <div class="d">
     <h2 id="dTitle">${esc(p.title)}</h2>
@@ -434,7 +445,7 @@ function closeSheet(){ $("#overlay").hidden=true; document.body.classList.remove
 
 /* lightbox */
 let lbList=[],idx=0;
-function show(){ $("#lbImg").src=lbList[idx]; $("#lbImg").alt=curP.title; $("#lbCap").textContent=`${curP.title} · ${idx+1} / ${lbList.length}`;
+function show(){ $("#lbImg").src=lbList[idx]; $("#lbImg").alt=curP.title; $("#lbCap").textContent=`${curP.title} · ${idx+1} / ${lbList.length}`+(CAP[lbList[idx]]?` · ${CAP[lbList[idx]]}`:"");
   $("#lbPrev").hidden=$("#lbNext").hidden=lbList.length<2; }
 function openLb(i){ lbList=imgsOf(curP); idx=i; show(); $("#lb").hidden=false; $("#lbClose").focus(); }
 function closeLb(){ $("#lb").hidden=true; $("#close")&&$("#close").focus(); }
