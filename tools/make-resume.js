@@ -40,7 +40,7 @@ h3{font-size:9.6pt;margin:10px 0 4px;color:var(--soft)}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 ul{margin:0;padding-left:1.1em}
 </style></head><body>
-<div class="top"><div><div style="color:var(--faint);font-size:8.5pt;letter-spacing:.12em">PR / CONTENT PLANNER</div>
+<div class="top"><div><div style="color:var(--faint);font-size:8.5pt;letter-spacing:.12em">DIGITAL PR · IMC CAMPAIGN PLANNER</div>
 <h1>신재우, 까다로운 이야기를 <mark>쉽게 전하는</mark> 기획자</h1></div>
 <div class="ct">andro0541@gmail.com<br>010-4814-0541<br>shinjaewoo-kr.github.io</div></div>
 <p class="lead">${esc(d.lead)}</p>
