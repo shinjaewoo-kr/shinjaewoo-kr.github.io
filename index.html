@@ -66,6 +66,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .nav a:hover{color:var(--accent)}
 .nav .sp{flex:1}
 .toggle{font:inherit;font-size:13.5px;border:1px dashed var(--rule);background:var(--sheet);color:var(--ink-soft);padding:4px 12px;border-radius:999px;cursor:pointer}
+.fl{display:flex;flex-wrap:wrap;gap:6px}
 .toggle[aria-pressed="true"]{border-style:solid;border-color:var(--accent);background:var(--accent);color:var(--sheet)}
 
 section.cap{padding-block:56px 0;scroll-margin-top:64px}
@@ -225,7 +226,7 @@ footer button{font:inherit;font-size:14px;border:1px solid var(--rule);backgroun
   <a href="#content">콘텐츠 기획·집필</a>
   <a href="#about">경력</a>
   <span class="sp"></span>
-  <button type="button" class="toggle" id="hcToggle" aria-pressed="false">헬스케어 사례만 보기</button>
+  <div class="fl" role="group" aria-label="분야별 보기"><button type="button" class="toggle" data-f="all" aria-pressed="true">전체</button><button type="button" class="toggle" data-f="healthcare" aria-pressed="false">헬스케어</button><button type="button" class="toggle" data-f="public" aria-pressed="false">공공</button><button type="button" class="toggle" data-f="brand" aria-pressed="false">브랜드·기업</button></div>
 </nav>
 
 <section class="cap" id="how">
@@ -236,13 +237,13 @@ footer button{font:inherit;font-size:14px;border:1px solid var(--rule);backgroun
   <ul class="how" style="margin:0;padding-left:0">
     <li><h3>규제 안에서도 통하는 메시지를 찾습니다</h3>
       <p>의료기기와 건강식품은 광고 규제가 까다롭습니다. 심의 기준과 관련 법을 먼저 확인하고, 그 안에서 쓸 수 있는 표현으로 메시지를 짭니다.</p>
-      <div class="jumps"><button type="button" data-open="stryker">스트라이커 Mako</button><button type="button" data-open="easyclaire">이지클레어</button><button type="button" data-open="mentor">멘토</button><button type="button" data-open="hyosim">효심원</button></div></li>
+      <div class="jumps"><button type="button" data-open="stryker" data-t="4">스트라이커 · 광고 심의</button><button type="button" data-open="easyclaire" data-t="0">이지클레어</button><button type="button" data-open="mentor">멘토</button><button type="button" data-open="hyosim" data-t="1">효심원</button></div></li>
     <li><h3>입장이 다른 사람들과 일을 맞춥니다</h3>
       <p>고객사, 해외 운영사, 병원 홍보팀, 정부 부처처럼 원하는 것이 서로 다른 사람들 사이에서 일정과 메시지를 조율합니다.</p>
-      <div class="jumps"><button type="button" data-open="squidgame">오징어 게임</button><button type="button" data-open="stryker">스트라이커 병원 영상</button><button type="button" data-open="palace">궁중문화축전</button><button type="button" data-open="supporters">4060 서포터즈</button></div></li>
+      <div class="jumps"><button type="button" data-open="squidgame" data-t="6">오징어 게임</button><button type="button" data-open="stryker" data-t="8">스트라이커 · 병원 협업</button><button type="button" data-open="palace" data-t="7">궁중문화축전</button><button type="button" data-open="supporters" data-t="2">4060 서포터즈</button></div></li>
     <li><h3>촬영과 편집을 아는 원고를 씁니다</h3>
       <p>현장을 직접 취재하고, 촬영과 편집 과정을 알기 때문에 제작 현장에서 바로 쓰이는 구성안과 원고를 씁니다.</p>
-      <div class="jumps"><button type="button" data-open="soyang">소양강댐</button><button type="button" data-open="hydrogen">수소 Answer</button><button type="button" data-open="antiterror">테러예방 교육영상</button><button type="button" data-open="skep">SK에코플랜트</button><button type="button" data-open="stryker">스트라이커 영상</button></div></li>
+      <div class="jumps"><button type="button" data-open="soyang" data-t="0">소양강댐</button><button type="button" data-open="hydrogen" data-t="1">수소 Answer</button><button type="button" data-open="antiterror" data-t="0">테러예방 교육영상</button><button type="button" data-open="skep" data-t="1">SK에코플랜트</button><button type="button" data-open="stryker" data-t="6">스트라이커 · 영상 시나리오</button></div></li>
   </ul>
 </section>
 
@@ -350,7 +351,7 @@ const P=[
  did:[["캠페인 공식 웹사이트의 페이지 구성을 직접 설계하고 개발사와 협업해 구현","img/squid-web.jpg"],"광고 시작 후 방문이 몰려 웹사이트 트래픽이 평소 허용량의 약 12배까지 늘자, 원인을 분석해 보고하고 사이트가 멈추지 않도록 대응 방안을 제안",["네이버·구글·카카오·메타 매체 믹스 전략을 세우고, 퍼포먼스 대행사 집행 성과를 보며 예산을 다시 배분","img/squid-kv.jpg"],"광고 타깃을 25–40세에서 19–45세로 넓히자고 제안하고, '서울데이트·이색데이트·서울놀거리' 같은 나들이 검색어 중심으로 키워드 전략 수립",["성수·건대·강남역 거리 이벤트를 기획하고 PM으로 운영 (분홍 의상과 QR 명함 배포)",["img/squid-street-2.jpg","img/squid-street-1.jpg","img/squid-street-3.jpg"]],"보도자료 배포와 보도 모니터링 리포트 작성, BusinessWire를 통한 영문·일문 해외 배포 운영","싱가포르 전시 운영사(Kingsmen)와 영문 PR 일정·인플루언서 자료 조율",["넷플릭스 관계자 포함 130명 규모 미디어데이(2025.2.24) 기획·운영",["img/squid-mediaday-1.jpg","img/squid-mediaday-2.jpg","img/squid-mediaday-3.jpg"]],["공식 SNS(인스타그램·페이스북·X) 운영 전략과 월별 게시물 일정·콘텐츠 기획안 작성","img/squid-5.jpg"],["팝업스토어 티저 영상 스토리보드와 카피 작성: 세계 도시를 거쳐 서울로 오는 'The Global Tour Stop' 구성을 총소리와 타이포그래피로 15–30초에 담고, 서울 랜드마크로 현지화","img/squid-storyboard.jpg"],"인스타그램 정보 채널(파워페이지) 바이럴 콘텐츠 기획과 라디오 광고 원고 작성","공식 인스타그램 계정이 사칭 사유로 정지됐을 때(2025.1.21) 원인과 대응 방안을 정리한 위기 대응 보고서 작성","어드민 콘텐츠 관리와 웹사이트 인계서 작성까지 운영 마무리"],
  res:["디지털 광고 총 노출 644만 회, 클릭 49,668건","버튼 클릭 전환 2,990건 (CVR 6.02%), 네이버 검색광고 클릭률 2.35%","1월 13일 배포 보도자료: 국내 54건 보도, 해외 영문 53곳 · 일문 14곳 게재"],note:"광고·보도 수치는 캠페인 전체 실적"},
 {id:"palace",sec:"campaign",titles:{content:"2025 궁중문화축전 보도자료 집필"},also:"content",focus:{content:[1,3,6]},keys:{content:"봄 축전 보도자료 직접 집필"},mine:"보도자료 작성·배포, 팝업스토어 현장 운영",title:"2025 궁중문화축전",client:"국가유산진흥원",year:"2025.01–07",key:"보도 536건",tags:["공공·문화"],
- cover:"img/palace-open.jpg",covers:{content:"img/doc-palace-cover.jpg"},imgs:["img/palace-open.jpg","img/palace-popup.jpg","img/palace-poster.jpg"],
+ cover:"img/palace-open.jpg",covers:{content:"img/palace-news-kbs.jpg"},imgs:["img/palace-open.jpg","img/palace-popup.jpg","img/palace-poster.jpg"],
  role:"국내외 언론홍보 운영, 보도자료 작성, 해외 보도자료 배포 운영",team:"하이브월드와이드 궁중문화축전팀",
  figs:[["보도 실적","536건"],["해외 보도","414건"],["국내 보도","122건"]],
  bg:"11회째를 맞은 국가 대표 궁중 축제입니다. 관람객 중 외국인 비중이 커지는 흐름에 맞춰 해외 홍보를 넓히는 것이 이번 해의 과제였습니다.",
@@ -358,7 +359,7 @@ const P=[
  res:["봄 축전 기준 보도 536건 (국내 122 · 해외 414)","외국인 티켓 오픈 해외 보도자료(3.26) 221곳 게재, 조회 2,561회","팝업스토어(K-Heritage 마켓) 소개 보도자료 국내 8건 보도, 4.18부터 현장 판매 운영"],note:"담당 캠페인 전체 실적",
  links:[["보도 기사 보기 (스포츠서울)","https://www.sportsseoul.com/news/read/1509133"]]},
 {id:"stryker",sec:"campaign",titles:{content:"Stryker Mako 병원 브랜디드 영상 시나리오",proposal:"Stryker Mako 2025 PR 수주 제안"},also:["content","proposal"],focus:{proposal:[0],content:[5,6,7,9]},keys:{proposal:"수주 제안서 시장 분석 → 연간 IMC 캠페인",content:"병원 영상 시나리오·구성안 직접 집필"},mine:"병원 영상 구성안 전체 작성, 촬영 진행",title:"Stryker Mako IMC와 병원 브랜디드 콘텐츠",client:"한국스트라이커",year:"2024.08–2025.07",key:"대학병원 2곳 브랜디드 영상",tags:["헬스케어"],hc:1,
- cover:"img/mako-brand-c.jpg",covers:{content:"img/doc-stryker-cover.jpg",proposal:["시장 분석","검색량·블로그 게시글 분석에서 출발한 연간 IMC 수주 제안"]},imgs:["img/mako-brand.jpg","img/stryker-smc-1.jpg","img/stryker-gl-1.jpg","img/mako-web.jpg","img/stryker-video-4.jpg","img/stryker-2.jpg","img/stryker-1.jpg","img/stryker-3.jpg","img/stryker-academy.jpg"],
+ cover:"img/mako-brand-c.jpg",covers:{content:"img/stryker-2.jpg",proposal:["시장 분석","검색량·블로그 게시글 분석에서 출발한 연간 IMC 수주 제안"]},imgs:["img/mako-brand.jpg","img/stryker-smc-1.jpg","img/stryker-gl-1.jpg","img/mako-web.jpg","img/stryker-video-4.jpg","img/stryker-2.jpg","img/stryker-1.jpg","img/stryker-3.jpg","img/stryker-academy.jpg"],
  role:"IMC 실무, 의료 브랜디드 콘텐츠 구성안·시나리오 전체 작성, 촬영 진행, 공식 홈페이지 운영",team:"4인 팀 (상무·과장·대리·사원)",
  figs:[["공개 영상","3개 채널"],["촬영 구성안","13차 수정"],["협업","대학병원 2곳"]],
  bg:"인공관절 수술 로봇 Mako를 환자와 보호자에게 정확하게 알리는 연간 통합 캠페인입니다. 광고 심의가 까다로운 의료기기라 브랜드를 앞세우기보다 의료진의 설명으로 신뢰를 쌓는 방식이 필요했습니다.",
@@ -380,7 +381,7 @@ const P=[
  did:["처음 계획한 피부과 체험존이 '의료기기 임대(판매)업' 관련 법적 문제에 걸리는 것을 확인하고, 온라인 콘텐츠 중심으로 과업을 다시 설계",["피부과 전문의 채널 3곳과 정보성 채널 1곳 유튜브 브랜디드 진행 (이동환TV 104만, 1분만 100만 등). 'LED 마스크는 의료기기인지부터 확인하라'는 메시지로 제품을 간접 노출","img/easy-yt.jpg"],["조선일보 기획기사 2건(4.17 · 4.24), ALLURE 5월호 어드버토리얼 진행","img/easy-allure.jpg"],"우먼센스·리빙센스 등 인스타그램 매거진 채널 6곳 콘텐츠, 브랜디드·PPL 바이럴 16건 운영",["유튜버별 스크립트 가이드 작성과 검수·수정: 의학 전문 채널부터 감성 채널까지 채널 말투에 맞추고, 의료기기 광고 심의 기준에 맞게 문구 조정. 인스타그램 정보 채널(파워페이지) 콘텐츠 기획안 작성",["img/easy-yt-4.jpg"]],"유튜브 영상을 다시 활용한 카드뉴스 21개 채널, 릴스 6개 채널 확산","결과보고서 작성: 정보성 채널 댓글의 부정 여론을 짚고, 전문의 채널 중심 2차 콘텐츠 방향 제안"],
  res:["유튜브 브랜디드 총 조회 49,067회","인스타그램 매거진 좋아요 9,535회, 릴스 조회 21,570회","캠페인 성과를 바탕으로 같은 고객사의 다른 브랜드(리파) 프로젝트 추가 수주에 기여"],note:"2024.3–6 캠페인 전체 실적"},
 {id:"hyosim",sec:"campaign",titles:{content:"효심원 카페 바이럴·광고 원고"},also:"content",focus:{content:[1,2,3]},keys:{content:"카페 바이럴·광고 원고 직접 작성"},mine:"카페 바이럴 설계, 바이럴·광고 원고 작성",title:"효심원 흑염소진액 런칭 캠페인",client:"비엠에스코퍼레이션",year:"2024.07–09",key:"언론 보도 약 23건",tags:["식품·소비재"],
- cover:"img/hyosim-brand-c.jpg",covers:{content:"img/doc-hyosim-cover.jpg"},imgs:["img/hyosim-brand.jpg","img/hyosim-product.jpg","img/hyosim-viral.jpg"],
+ cover:"img/hyosim-brand-c.jpg",covers:{content:"img/hyosim-viral.jpg"},imgs:["img/hyosim-brand.jpg","img/hyosim-product.jpg","img/hyosim-viral.jpg"],
  role:"카페 바이럴 기획, 바이럴·광고 원고 작성, 브랜드콘텐츠 광고 세팅",team:"하이브월드와이드 디지털PR팀",
  figs:[["카페 바이럴","45건"],["바이럴 조회","26,690회"],["런칭 PR 보도","약 12개 매체"]],
  bg:"건강식품 신제품의 첫 출시였습니다. 언론 보도로 신뢰를 만들고, 맘카페 등 실제 구매층이 모인 곳에서 이야기가 퍼지게 하는 것이 목표였습니다.",
@@ -450,9 +451,11 @@ function cover(p,sec){
 }
 /* 섹션별 강조 업무: focus:{content:[...], proposal:[...]} (세부 업무 번호, 0부터) */
 const FOCUS={content:"콘텐츠 기획·집필",proposal:"제안"};
+const FIELDS={healthcare:["stryker","mentor","easyclaire"],public:["palace","supporters","pension","traffic","hydrogen","soyang","antiterror"],brand:["squidgame","easyclaire","hyosim","skep"]};
+const fieldsOf=p=>Object.keys(FIELDS).filter(f=>FIELDS[f].includes(p.id));
 const inSec=(p,s)=>p.sec===s||(Array.isArray(p.also)?p.also.includes(s):p.also===s);
 function card(p,sec){
-  return `<button type="button" class="card" data-id="${p.id}" data-sec="${sec}" data-hc="${p.hc?1:0}">${cover(p,sec)}
+  return `<button type="button" class="card" data-id="${p.id}" data-sec="${sec}" data-f="${fieldsOf(p).join(" ")}">${cover(p,sec)}
     <div class="cbody"><div class="ttl">${esc((p.titles&&p.titles[sec])||p.title)}</div><div class="sub">${esc(p.client)} · <span class="yr">${esc(p.year)}</span></div>${p.mine&&sec===p.sec?`<div class="mine"><b>내 역할</b>${esc(p.mine)}</div>`:""}${(p.keys&&p.keys[sec])||p.key?`<div class="key"><span>${esc((p.keys&&p.keys[sec])||p.key)}</span></div>`:""}
     <div class="tags">${p.tags.map(t=>`<span class="tag${t==="헬스케어"?" hc":""}">#${esc(t)}</span>`).join("")}</div>
     <div class="open">세부 업무 ${p.did.length}건 보기 →</div></div></button>`;
@@ -463,7 +466,7 @@ document.querySelectorAll("[data-grid]").forEach(g=>{
 
 let lastFocus=null,curP=null;
 function imgsOf(p){ const a=[...(p.imgs||[])]; p.did.forEach(x=>T(x)[1].forEach(i=>{ if(!a.includes(i)) a.push(i); })); return a; }
-function openSheet(id,sec){
+function openSheet(id,sec,t){
   const p=P.find(x=>x.id===id); if(!p) return; curP=p;
   const all=imgsOf(p);
   const gal=p.imgs?`<div class="gallery${p.imgs.length===1?" one":""}">${p.imgs.map(s=>`<button type="button" data-z="${all.indexOf(s)}" aria-label="크게 보기"><img src="${s}" alt="${esc(p.title)} 자료">${lab(s)}</button>`).join("")}</div>`
@@ -488,7 +491,8 @@ function openSheet(id,sec){
   </div>`;
   lastFocus=document.activeElement;
   $("#overlay").hidden=false; document.body.classList.add("locked"); $("#overlay").scrollTop=0; $("#close").focus({preventScroll:true});
-  const h1=sec&&document.querySelector("#sheet .task.hl"); if(h1) h1.scrollIntoView({block:"center"});
+  const tk=t!=null&&document.querySelectorAll("#sheet .task")[t]; if(tk) tk.classList.add("hl");
+  const h1=tk||(sec&&document.querySelector("#sheet .task.hl")); if(h1) h1.scrollIntoView({block:"center"});
 }
 function closeSheet(){ $("#overlay").hidden=true; document.body.classList.remove("locked"); if(lastFocus) lastFocus.focus(); }
 
@@ -499,7 +503,7 @@ function show(){ $("#lbImg").src=lbList[idx]; $("#lbImg").hidden=false; $("#lbIm
 function openLb(i,list){ lbList=list||imgsOf(curP); idx=i; show(); $("#lb").hidden=false; $("#lbClose").focus(); }
 function closeLb(){ $("#lb").hidden=true; $("#close")&&$("#close").focus(); }
 document.addEventListener("click",e=>{
-  const j=e.target.closest("[data-open]"); if(j){openSheet(j.dataset.open);return;}
+  const j=e.target.closest("[data-open]"); if(j){openSheet(j.dataset.open,null,j.dataset.t!=null?+j.dataset.t:null);return;}
   const c=e.target.closest(".card"); if(c){openSheet(c.dataset.id,c.dataset.sec);return;}
   const z=e.target.closest("[data-z]"); if(z){openLb(+z.dataset.z);return;}
   const tk=e.target.closest("[data-k]"); if(tk){openLb(0,T(curP.did[+tk.dataset.k])[1]);return;}
@@ -518,17 +522,17 @@ document.addEventListener("keydown",e=>{
   if(!$("#overlay").hidden&&e.key==="Escape") closeSheet();
 });
 
-/* healthcare filter */
-const hc=$("#hcToggle");
-function setHC(on){
-  hc.setAttribute("aria-pressed",on);
-  document.querySelectorAll(".card").forEach(c=>c.hidden=on&&c.dataset.hc!=="1");
+/* 분야별 보기: 주소 뒤 #healthcare · #public · #brand 로도 열 수 있음 */
+function setField(f){
+  const on=f!=="all";
+  document.querySelectorAll(".fl .toggle").forEach(b=>b.setAttribute("aria-pressed",b.dataset.f===f));
+  document.querySelectorAll(".card").forEach(c=>c.hidden=on&&!c.dataset.f.split(" ").includes(f));
   document.querySelectorAll("section.cap[id]:not(#about)").forEach(s=>{ s.hidden=on&&!s.querySelector(".card:not([hidden])"); });
   $("#others").hidden=on;
 }
-hc.addEventListener("click",()=>setHC(hc.getAttribute("aria-pressed")!=="true"));
+document.querySelectorAll(".fl .toggle").forEach(b=>b.addEventListener("click",()=>setField(b.dataset.f)));
 const h=(location.hash||"").slice(1);
-if(h==="healthcare") setHC(true); else if(P.some(p=>p.id===h)) openSheet(h);
+if(FIELDS[h]) setField(h); else if(P.some(p=>p.id===h)) openSheet(h);
 
 $("#copyMail").addEventListener("click",async e=>{
   const t=$("#mail").textContent.trim();
