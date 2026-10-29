@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Google tag (gtag.js) : 방문자 통계 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NP3JJZQBXN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NP3JJZQBXN');
+</script>
 <meta name="description" content="PR 대행사·대기업 사내 커뮤니케이션·정부 영상 콘텐츠를 거친 5년 차 기획자 신재우의 포트폴리오. 헬스케어·공공·엔터테인먼트 캠페인과 제안, 콘텐츠 기획.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shinjaewoo-kr.github.io/">
@@ -464,10 +472,13 @@ document.querySelectorAll("[data-grid]").forEach(g=>{
   const s=g.dataset.grid; g.innerHTML=P.filter(p=>inSec(p,s)).map(p=>card(p,s)).join("");
 });
 
+/* 방문자 통계: 어떤 카드·버튼을 눌렀는지 구글 애널리틱스로 보냄 */
+function ev(n,o){ if(typeof gtag==="function") gtag("event",n,o||{}); }
 let lastFocus=null,curP=null;
 function imgsOf(p){ const a=[...(p.imgs||[])]; p.did.forEach(x=>T(x)[1].forEach(i=>{ if(!a.includes(i)) a.push(i); })); return a; }
 function openSheet(id,sec,t){
   const p=P.find(x=>x.id===id); if(!p) return; curP=p;
+  ev("open_project",{project_id:id,project_title:p.title,section:sec||(t!=null?"workstyle":"link")});
   const all=imgsOf(p);
   const gal=p.imgs?`<div class="gallery${p.imgs.length===1?" one":""}">${p.imgs.map(s=>`<button type="button" data-z="${all.indexOf(s)}" aria-label="크게 보기"><img src="${s}" alt="${esc(p.title)} 자료">${lab(s)}</button>`).join("")}</div>`
     :`<div class="gtypo">${cover(p).replace('class="cover"','class="cover" style="aspect-ratio:auto;height:200px"')}</div>`;
@@ -524,7 +535,7 @@ document.addEventListener("keydown",e=>{
 
 /* 분야별 보기: 주소 뒤 #healthcare · #public · #brand 로도 열 수 있음 */
 function setField(f){
-  const on=f!=="all";
+  const on=f!=="all"; ev("filter_field",{field:f});
   document.querySelectorAll(".fl .toggle").forEach(b=>b.setAttribute("aria-pressed",b.dataset.f===f));
   document.querySelectorAll(".card").forEach(c=>c.hidden=on&&!c.dataset.f.split(" ").includes(f));
   document.querySelectorAll("section.cap[id]:not(#about)").forEach(s=>{ s.hidden=on&&!s.querySelector(".card:not([hidden])"); });
@@ -534,7 +545,9 @@ document.querySelectorAll(".fl .toggle").forEach(b=>b.addEventListener("click",(
 const h=(location.hash||"").slice(1);
 if(FIELDS[h]) setField(h); else if(P.some(p=>p.id===h)) openSheet(h);
 
+document.querySelectorAll("a.cv").forEach(a=>a.addEventListener("click",()=>ev("resume_download")));
 $("#copyMail").addEventListener("click",async e=>{
+  ev("copy_email");
   const t=$("#mail").textContent.trim();
   try{await navigator.clipboard.writeText(t);e.target.textContent="복사했어요";}
   catch(_){const r=document.createRange();r.selectNodeContents($("#mail"));const s=getSelection();s.removeAllRanges();s.addRange(r);e.target.textContent="선택했어요, 복사하세요";}
