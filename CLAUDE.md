@@ -24,6 +24,12 @@
 - 디자인: 제목 글꼴 Gowun Batang, 본문 IBM Plex Sans KR, 숫자·라벨 IBM Plex Mono / 포인트 색 `#2a46c9`, 형광펜 `#fff1a8` / 라이트·다크 모드 자동.
 - **한국어 줄바꿈:** `body`에 `word-break:keep-all`이 들어 있습니다. 글을 추가하거나 고칠 때 단어 중간에서 줄이 넘어가지 않는지 휴대폰 폭(390px)과 PC 폭에서 꼭 확인하세요. 사용자가 계속 챙겨 달라고 요청한 부분입니다.
 - 이미지: JPG, 가로 1200–1400px, 품질 80 정도로 줄여 `img/`에 저장합니다. 카드 표지는 16:10 비율로 잘려 보이니 중요한 부분이 가운데 오게 잘라 둡니다.
+- **방문자 통계(10.29):** 구글 애널리틱스(GA4) 측정 ID `G-NP3JJZQBXN`(재우 개인 계정 「신재우」 > 속성 「신재우 포트폴리오」). 재우의 예전 GA 계정(54516992)은 다른 서비스 기록이라 쓰지 않습니다.
+  - 태그는 `<head>`에 있습니다. 실제 주소(shinjaewoo-kr.github.io)에서만 집계하고(미리보기·로컬은 제외), 광고용 정보 수집(구글 신호·광고 맞춤)은 껐습니다.
+  - 재우 본인 방문 빼기: 주소 뒤 `?notrack`으로 한 번 열면 그 브라우저는 집계 제외(`?track`으로 되돌림). 휴대폰·PC 각각 한 번씩.
+  - `ev()` 함수가 보내는 이벤트: `open_project`(project_id·project_title·section — campaign/proposal/content, 일하는 방식 버튼은 workstyle, 주소 링크는 link), `view_image`(project_id), `click_link`(project_id·link_text·link_url), `view_section`(section: how/campaign/proposal/content/about), `filter_field`(field), `resume_download`, `copy_email`. 매개변수를 보고서에서 보려면 GA '맞춤 정의'에 등록해야 합니다.
+  - 회사별 링크: 주소 뒤에 `?utm_source=회사이름` → 애널리틱스 '트래픽 획득'에서 구분.
+  - 맨 아래에 "이 사이트는 방문 통계를 위해 Google 애널리틱스를 사용합니다." 안내 문구.
 - 카톡·SNS 링크 미리보기: `<head>`의 og 태그와 `img/og.jpg`(1200×630)를 씁니다. 제목이나 소개 문구가 바뀌면 이것도 같이 고칩니다. (10.28 직함 변경에 맞춰 새로 만듦. 카톡이 예전 이미지를 기억하므로 바꿀 때마다 og:image 주소 끝 `?v=` 숫자를 올립니다.)
 
 ## 3. 내용 작성 원칙 (중요)
