@@ -8,8 +8,21 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  /* 내 방문 빼기: 주소 뒤에 ?notrack 을 붙여 한 번 열면 그 브라우저는 통계에서 빠짐 (?track 으로 되돌림) */
+  (function(){
+    var q=location.search, off=false;
+    try{
+      if(/[?&]notrack\b/.test(q)){ localStorage.setItem("notrack","1"); alert("이 브라우저의 방문은 이제 통계에 잡히지 않습니다."); }
+      if(/[?&]track\b/.test(q)){ localStorage.removeItem("notrack"); alert("이 브라우저의 방문을 다시 통계에 넣습니다."); }
+      off=localStorage.getItem("notrack")==="1";
+    }catch(e){}
+    if(/[?&](no)?track\b/.test(q)) history.replaceState(null,"",location.pathname+location.hash);
+    /* 실제 사이트 주소에서만 집계 (미리보기·내 컴퓨터에서 열 때는 빼기) */
+    if(location.hostname!=="shinjaewoo-kr.github.io") off=true;
+    if(off) window["ga-disable-G-NP3JJZQBXN"]=true;
+  })();
   gtag('js', new Date());
-  gtag('config', 'G-NP3JJZQBXN');
+  gtag('config', 'G-NP3JJZQBXN', {allow_google_signals:false, allow_ad_personalization_signals:false});
 </script>
 <meta name="description" content="PR 대행사·대기업 사내 커뮤니케이션·정부 영상 콘텐츠를 거친 5년 차 기획자 신재우의 포트폴리오. 헬스케어·공공·엔터테인먼트 캠페인과 제안, 콘텐츠 기획.">
 <meta property="og:type" content="website">
@@ -177,6 +190,7 @@ section.cap{padding-block:56px 0;scroll-margin-top:64px}
 footer{margin-top:56px;padding-top:24px;border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between}
 .cv{display:inline-block;font-size:14px;text-decoration:none;border:1px solid var(--accent);color:var(--accent);background:var(--sheet);padding:5px 14px;border-radius:6px}
 .cv:hover{background:var(--accent);color:var(--sheet)}
+.ga-note{flex-basis:100%;margin:0;font-size:12px;color:var(--ink-faint)}
 footer button{font:inherit;font-size:14px;border:1px solid var(--rule);background:var(--sheet);color:var(--ink);padding:6px 14px;border-radius:6px;cursor:pointer}
 
 /* lightbox */
@@ -322,6 +336,7 @@ footer button{font:inherit;font-size:14px;border:1px solid var(--rule);backgroun
       <div><b>MAIL</b><span class="mono" id="mail">andro0541@gmail.com</span></div>
     </div>
     <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="cv" href="files/shinjaewoo-resume.pdf" download="신재우_이력서.pdf">이력서 PDF 받기</a><button type="button" id="copyMail">이메일 복사</button></div>
+    <p class="ga-note">이 사이트는 방문 통계를 위해 Google 애널리틱스를 사용합니다.</p>
   </footer>
 </section>
 </div>
@@ -511,12 +526,13 @@ function closeSheet(){ $("#overlay").hidden=true; document.body.classList.remove
 let lbList=[],idx=0;
 function show(){ $("#lbImg").src=lbList[idx]; $("#lbImg").hidden=false; $("#lbImg").alt=curP.title; $("#lbCap").textContent=`${curP.title} · ${idx+1} / ${lbList.length}`+(capOf(lbList[idx])?` · ${capOf(lbList[idx])}`:"");
   $("#lbPrev").hidden=$("#lbNext").hidden=lbList.length<2; }
-function openLb(i,list){ lbList=list||imgsOf(curP); idx=i; show(); $("#lb").hidden=false; $("#lbClose").focus(); }
+function openLb(i,list){ ev("view_image",{project_id:curP.id}); lbList=list||imgsOf(curP); idx=i; show(); $("#lb").hidden=false; $("#lbClose").focus(); }
 function closeLb(){ $("#lb").hidden=true; $("#close")&&$("#close").focus(); }
 document.addEventListener("click",e=>{
   const j=e.target.closest("[data-open]"); if(j){openSheet(j.dataset.open,null,j.dataset.t!=null?+j.dataset.t:null);return;}
   const c=e.target.closest(".card"); if(c){openSheet(c.dataset.id,c.dataset.sec);return;}
   const z=e.target.closest("[data-z]"); if(z){openLb(+z.dataset.z);return;}
+  const ln=e.target.closest("#sheet .links a"); if(ln){ev("click_link",{project_id:curP.id,link_text:ln.textContent.replace(" ↗",""),link_url:ln.href});return;}
   const tk=e.target.closest("[data-k]"); if(tk){openLb(0,T(curP.did[+tk.dataset.k])[1]);return;}
   if(e.target.id==="close"||e.target.id==="overlay"){closeSheet();return;}
   if(e.target.id==="lbClose"||e.target.classList.contains("lb-img")) closeLb();
@@ -545,6 +561,12 @@ document.querySelectorAll(".fl .toggle").forEach(b=>b.addEventListener("click",(
 const h=(location.hash||"").slice(1);
 if(FIELDS[h]) setField(h); else if(P.some(p=>p.id===h)) openSheet(h);
 
+/* 어느 섹션까지 읽었는지 (섹션마다 한 번) */
+if("IntersectionObserver" in window){
+  const seen=new Set(), io=new IntersectionObserver(es=>es.forEach(x=>{ const id=x.target.id;
+    if(x.isIntersecting&&!seen.has(id)){ seen.add(id); ev("view_section",{section:id}); io.unobserve(x.target); } }),{rootMargin:"-45% 0px -45% 0px"});
+  document.querySelectorAll("section.cap[id]").forEach(s=>io.observe(s));
+}
 document.querySelectorAll("a.cv").forEach(a=>a.addEventListener("click",()=>ev("resume_download")));
 $("#copyMail").addEventListener("click",async e=>{
   ev("copy_email");
