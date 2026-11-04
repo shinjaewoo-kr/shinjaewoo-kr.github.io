@@ -133,6 +133,8 @@ section.cap{padding-block:56px 0;scroll-margin-top:64px}
 .cbody .open{font-size:13px;color:var(--accent);margin-top:6px}
 
 /* 대표 프로젝트 */
+.bestb{justify-self:start;font-size:12px;line-height:1.5;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:0 6px}
+.more-btn{display:none;width:100%;margin-top:16px;font:inherit;font-size:15px;border:1px solid var(--rule);background:var(--sheet);color:var(--accent);padding:12px;border-radius:10px;cursor:pointer}
 .feat .cbody{gap:8px}
 .feat .no{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.04em}
 .sumlist{display:grid;gap:6px;margin:6px 0 0;padding-top:10px;border-top:1px solid var(--rule)}
@@ -232,6 +234,8 @@ footer button{font:inherit;font-size:14px;border:1px solid var(--rule);backgroun
   .tl li{grid-template-columns:minmax(0,1fr);gap:2px}
   .figs{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
   .grid{grid-template-columns:minmax(0,1fr)}
+  .grid.fold .card:nth-child(n+4){display:none}
+  .grid.fold + .more-btn{display:block}
 }
 </style>
 </head>
@@ -333,7 +337,8 @@ footer button{font:inherit;font-size:14px;border:1px solid var(--rule);backgroun
     <h2>콘텐츠 기획·집필</h2>
     <p>구성안과 원고를 직접 쓴 영상과 사내 콘텐츠입니다. 편집 과정을 알기 때문에 촬영 현장과 편집실에서 바로 쓰일 수 있는 원고를 씁니다.</p>
   </div>
-  <div class="grid" data-grid="content"></div>
+  <div class="grid fold" data-grid="content"></div>
+  <button type="button" class="more-btn" id="moreContent"></button>
 </section>
 
 <section class="cap" id="about">
@@ -499,7 +504,8 @@ function cover(p,sec){
   const c=(p.covers&&p.covers[sec])||p.cover;
   if(Array.isArray(c)) return typoCover(c);
   if(!p.imgs) return typoCover(p.typo,p.alt);
-  return `<div class="cover"><img src="${c}" alt="">${lab(c)}</div>`;
+  /* 카드 표지는 작게 줄인 사진(img/c/)을 쓰고, 없으면 원본으로 */
+  return `<div class="cover"><img src="${c.replace("img/","img/c/")}" alt="" onerror="this.onerror=null;this.src='${c}'">${lab(c)}</div>`;
 }
 /* 섹션별 강조 업무: focus:{content:[...], proposal:[...]} (세부 업무 번호, 0부터) */
 const FOCUS={content:"콘텐츠 기획·집필",proposal:"제안"};
@@ -508,7 +514,7 @@ const fieldsOf=p=>Object.keys(FIELDS).filter(f=>FIELDS[f].includes(p.id));
 const inSec=(p,s)=>p.sec===s||(Array.isArray(p.also)?p.also.includes(s):p.also===s);
 function card(p,sec){
   return `<button type="button" class="card" data-id="${p.id}" data-sec="${sec}" data-f="${fieldsOf(p).join(" ")}">${cover(p,sec)}
-    <div class="cbody"><div class="ttl">${esc((p.titles&&p.titles[sec])||p.title)}</div><div class="sub">${esc(p.client)} · <span class="yr">${esc(p.year)}</span></div>${p.mine&&sec===p.sec?`<div class="mine"><b>내 역할</b>${esc(p.mine)}</div>`:""}${(p.keys&&p.keys[sec])||p.key?`<div class="key"><span>${esc((p.keys&&p.keys[sec])||p.key)}</span></div>`:""}
+    <div class="cbody">${sec==="campaign"&&BEST.includes(p.id)?`<span class="bestb">대표 프로젝트</span>`:""}<div class="ttl">${esc((p.titles&&p.titles[sec])||p.title)}</div><div class="sub">${esc(p.client)} · <span class="yr">${esc(p.year)}</span></div>${p.mine&&sec===p.sec?`<div class="mine"><b>내 역할</b>${esc(p.mine)}</div>`:""}${(p.keys&&p.keys[sec])||p.key?`<div class="key"><span>${esc((p.keys&&p.keys[sec])||p.key)}</span></div>`:""}
     <div class="tags">${p.tags.map(t=>`<span class="tag${t==="헬스케어"?" hc":""}">#${esc(t)}</span>`).join("")}</div>
     <div class="open">세부 업무 ${p.did.length}건${p.links?` · 영상·기사 ${p.links.length}개`:""} 보기 →</div></div></button>`;
 }
@@ -523,6 +529,12 @@ $("[data-best]").innerHTML=BEST.map((id,i)=>{const p=P.find(x=>x.id===id);
 document.querySelectorAll("[data-grid]").forEach(g=>{
   const s=g.dataset.grid; g.innerHTML=P.filter(p=>inSec(p,s)).map(p=>card(p,s)).join("");
 });
+
+/* 휴대폰에서는 콘텐츠 섹션을 3개만 먼저 보여 주고 버튼으로 펼침 (PC는 늘 전체) */
+const cGrid=$('[data-grid="content"]'), moreBtn=$("#moreContent");
+moreBtn.textContent=`${cGrid.children.length-3}건 더 보기`;
+function unfold(){ cGrid.classList.remove("fold"); }
+moreBtn.addEventListener("click",()=>{ unfold(); ev("expand_content"); });
 
 /* 방문자 통계: 어떤 카드·버튼을 눌렀는지 구글 애널리틱스로 보냄 */
 function ev(n,o){ if(typeof gtag==="function") gtag("event",n,o||{}); }
@@ -589,7 +601,7 @@ document.addEventListener("keydown",e=>{
 
 /* 분야별 보기: 주소 뒤 #healthcare · #public · #brand 로도 열 수 있음 */
 function setField(f){
-  const on=f!=="all"; ev("filter_field",{field:f});
+  const on=f!=="all"; ev("filter_field",{field:f}); if(on) unfold();
   document.querySelectorAll(".fl .toggle").forEach(b=>b.setAttribute("aria-pressed",b.dataset.f===f));
   document.querySelectorAll(".card").forEach(c=>c.hidden=on&&!c.dataset.f.split(" ").includes(f));
   document.querySelectorAll("section.cap[id]:not(#about)").forEach(s=>{ s.hidden=on&&!s.querySelector(".card:not([hidden])"); });
