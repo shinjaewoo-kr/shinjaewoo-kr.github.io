@@ -27,7 +27,7 @@
 - **방문자 통계(10.29):** 구글 애널리틱스(GA4) 측정 ID `G-NP3JJZQBXN`(재우 개인 계정 「신재우」 > 속성 「신재우 포트폴리오」). 재우의 예전 GA 계정(54516992)은 다른 서비스 기록이라 쓰지 않습니다.
   - 태그는 `<head>`에 있습니다. 실제 주소(shinjaewoo-kr.github.io)에서만 집계하고(미리보기·로컬은 제외), 광고용 정보 수집(구글 신호·광고 맞춤)은 껐습니다.
   - 재우 본인 방문 빼기: 주소 뒤 `?notrack`으로 한 번 열면 그 브라우저는 집계 제외(`?track`으로 되돌림). 휴대폰·PC 각각 한 번씩.
-  - `ev()` 함수가 보내는 이벤트: `open_project`(project_id·project_title·section — campaign/proposal/content, 일하는 방식 버튼은 workstyle, 주소 링크는 link), `view_image`(project_id), `click_link`(project_id·link_text·link_url), `view_section`(section: how/campaign/proposal/content/about), `filter_field`(field), `resume_download`, `copy_email`. 매개변수를 보고서에서 보려면 GA '맞춤 정의'에 등록해야 합니다.
+  - `ev()` 함수가 보내는 이벤트: `open_project`(project_id·project_title·section — campaign/proposal/content, 일하는 방식 버튼은 workstyle, 주소 링크는 link), `view_image`(project_id), `click_link`(project_id·link_text·link_url), `view_section`(section: how/campaign/proposal/content/about), `filter_field`(field), `resume_download`, `copy_email`, `expand_content`(휴대폰 콘텐츠 섹션 펼치기). 매개변수를 보고서에서 보려면 GA '맞춤 정의'에 등록해야 합니다.
   - 회사별 링크: 주소 뒤에 `?utm_source=회사이름` → 애널리틱스 '트래픽 획득'에서 구분.
   - 맨 아래에 "이 사이트는 방문 통계를 위해 Google 애널리틱스를 사용합니다." 안내 문구.
 - 카톡·SNS 링크 미리보기: `<head>`의 og 태그와 `img/og.jpg`(1200×630)를 씁니다. 제목이나 소개 문구가 바뀌면 이것도 같이 고칩니다. (10.28 직함 변경에 맞춰 새로 만듦. 카톡이 예전 이미지를 기억하므로 바꿀 때마다 og:image 주소 끝 `?v=` 숫자를 올립니다.)
@@ -118,6 +118,9 @@
    - 대표 프로젝트: 숫자 줄 아래 첫 섹션 `#best`. `index.html`의 `BEST=["squidgame","palace","stryker"]`로 고릅니다. 카드에 3줄 요약까지 보입니다.
    - '일하는 방식'은 캠페인·PR 섹션 아래로 옮김. 메뉴 순서: 대표 프로젝트 · 캠페인·PR · 일하는 방식 · 기획·제안 · 콘텐츠 · 경력.
    - 3줄 요약: 각 프로젝트의 `sum:[과제, 내가 한 일, 결과, (범위 표시)]`. 상세 창 제목 바로 아래에 나옵니다. 네 번째 칸은 "캠페인 전체 실적" 같은 범위 표시(결과 아래 작은 글씨).
+   - 대표 프로젝트 3개는 캠페인·PR 섹션 카드에 "대표 프로젝트" 표시(`.bestb`)가 붙습니다(11.04).
+   - 휴대폰(620px 이하)에서는 콘텐츠 기획·집필 섹션이 처음 3개만 보이고 "6건 더 보기" 버튼으로 펼칩니다(`.grid.fold`, 11.04). 분야 버튼을 누르면 자동으로 펼칩니다. PC는 늘 전체.
+   - 1번 검색 등록(구글·네이버)과 영문 요약은 사용자가 필요 없다고 함(11.04).
    - 경력: 회사마다 대표 성과 한 줄(`.k`)과 프로젝트 바로가기 버튼(`data-open="id" data-s="about"`).
    - 결과물 링크: 예전 PDF 포트폴리오의 링크 20개는 모두 같은 유튜브 주소(9GPO5BcY9EA) 하나였음 → 「역사 속의 소양강 댐」(최태성) K-water 공식 채널 영상(사용자 확인 11.03). 지구소녀는 비공개라 링크 없음.
    - 반영됨(11.03, 사용자 제공): 오징어게임 디지틀조선 기사(티저는 홈페이지 전용이라 유튜브 없음), 궁중 KBS 뉴스, 이지클레어 의사 유튜버 영상 3개, 효심원 뉴스탭 기사, 소양강댐 영상 4개(재생목록), 수소 Answer 시즌2 영상 2개. 11.03 사용자가 환경 설정에 youtube.com을 허용 → `curl https://www.youtube.com/oembed?url=...&format=json`으로 제목 확인해 링크 이름 붙임(WebFetch는 여전히 막힘, curl은 됨). 소양강 「역사 속의 소양강 댐」은 K-water 공식 채널본(9GPO5BcY9EA)과 제작사 채널본(KEttoSq_3Qs)이 겹쳐 공식 채널본만 남김. 소양강 4개 = 역사 속의 소양강 댐·소양강댐은 지금·드론 홍보영상·물문화관 예고편(로운이네 가족일기는 온라인에 없음). 수소 = 시즌2 4화 인천 연료전지 발전소, 5화 H2 MEET. 이지클레어 = 의사 혜연·이동환TV·피부심. 카드 아래 "영상·기사 n개" 표시.
